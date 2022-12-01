@@ -36,6 +36,8 @@ main(int argc, char* argv[]) {
     atexit(onClosing);
 
     free(name);
+
+    return 0;
 }
 
 static void

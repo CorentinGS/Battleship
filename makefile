@@ -24,7 +24,7 @@
 NAME	= C
 
 # Name of the compiler
-CC 		= clang
+CC 		= gcc
 
 # Flags for the compiler
 CFLAGS	= -Wall -std=c90 -ansi -pedantic
