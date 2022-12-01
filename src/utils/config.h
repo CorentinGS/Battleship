@@ -25,6 +25,11 @@
 #define CARRIER_COUNT      1
 
 /* Ship size enum */
-enum ship_size { SHIP_FRIGATE_SIZE = 1, SHIP_DESTROYER_SIZE = 2, SHIP_CRUISER_SIZE = 3, SHIP_CARRIER_SIZE = 4 };
+typedef enum ship_size {
+    SHIP_FRIGATE_SIZE = 1,
+    SHIP_DESTROYER_SIZE = 2,
+    SHIP_CRUISER_SIZE = 3,
+    SHIP_CARRIER_SIZE = 4
+} ShipSize;
 
 #endif //BATTLESHIP_CONFIG_H

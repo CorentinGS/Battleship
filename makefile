@@ -65,7 +65,7 @@ _OBJS += $(SRCS:.c=.o)
 OBJS = $(patsubst %,objs/%,$(_OBJS))
 
 
-HEADERS 		= const.h
+HEADERS 		= utils/const.h utils/config.h struct.h
 
 MAIN			= main.c
 
