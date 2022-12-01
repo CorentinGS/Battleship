@@ -29,7 +29,6 @@ main(int argc, char* argv[]) {
 
     memset(&game, 0, sizeof(game));
 
-
     init_board(&game.board);
 
     free(name);

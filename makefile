@@ -58,14 +58,14 @@ SRCS_PATH		= ./src
 
 INCLUDE_PATH	= ./src
 
-SRCS			= player.c
+SRCS			= player.c board.c tile.c
 
 _OBJS += $(SRCS:.c=.o)
 
 OBJS = $(patsubst %,objs/%,$(_OBJS))
 
 
-HEADERS 		= utils/const.h utils/config.h struct.h
+HEADERS 		= utils/const.h utils/config.h struct.h common.h
 
 MAIN			= main.c
 
