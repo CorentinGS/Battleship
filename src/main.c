@@ -13,7 +13,7 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "const.h"
+#include "utils/const.h"
 #include "player.h"
 #include <malloc.h>
 
@@ -24,5 +24,3 @@ main(int argc, char* argv[]) {
     printf("Hello %s", name);
     free(name);
 }
-
-

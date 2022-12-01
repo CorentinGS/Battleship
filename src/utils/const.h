@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * player.h                              /      | /  _____|    /       |      *
+ * const.h                               /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,9 +13,9 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_PLAYER_H
-#define BATTLESHIP_PLAYER_H
+#ifndef BATTLESHIP_CONST_H
+#define BATTLESHIP_CONST_H
 
-extern void get_player_name(char* name, int max_size);
+#define MAX_NAME_SIZE 100
 
-#endif // BATTLESHIP_PLAYER_H
+#endif // BATTLESHIP_CONST_H

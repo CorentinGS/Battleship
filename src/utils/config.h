@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * player.h                              /      | /  _____|    /       |      *
+ * config.h                              /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,9 +13,18 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_PLAYER_H
-#define BATTLESHIP_PLAYER_H
+#ifndef BATTLESHIP_CONFIG_H
+#define BATTLESHIP_CONFIG_H
 
-extern void get_player_name(char* name, int max_size);
+#define BOARD_WIDTH        10
+#define BOARD_HEIGHT       10
 
-#endif // BATTLESHIP_PLAYER_H
+#define FRIGATE_COUNT      3
+#define DESTROYER_COUNT    2
+#define SHIP_CRUISER_COUNT 2
+#define CARRIER_COUNT      1
+
+/* Ship size enum */
+enum ship_size { SHIP_FRIGATE_SIZE = 1, SHIP_DESTROYER_SIZE = 2, SHIP_CRUISER_SIZE = 3, SHIP_CARRIER_SIZE = 4 };
+
+#endif //BATTLESHIP_CONFIG_H

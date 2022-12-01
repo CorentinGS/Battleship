@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * main.c                                /      | /  _____|    /       |      *
+ * struct.h                              /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,9 +13,31 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_CONST_H
-#define BATTLESHIP_CONST_H
+#ifndef BATTLESHIP_STRUCT_H
+#define BATTLESHIP_STRUCT_H
 
-#define MAX_NAME_SIZE 100
+#include "utils/const.h"
 
-#endif // BATTLESHIP_CONST_H
+/* Player structure */
+typedef struct {
+    char name[MAX_NAME_SIZE];
+    int score;
+} Player;
+
+/* Board */
+typedef struct {
+    int size;
+    int** board;
+} Board;
+
+
+/* Ship */
+typedef struct {
+    int size;
+    int x;
+    int y;
+    int orientation;
+} Ship;
+
+
+#endif //BATTLESHIP_STRUCT_H
