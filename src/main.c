@@ -13,16 +13,25 @@
  *                                                                            *
  ******************************************************************************/
 
+#include "main.h"
+
 #include "utils/const.h"
 #include "player.h"
+#include "board.h"
 #include <malloc.h>
+#include <string.h>
 
 int
 main(int argc, char* argv[]) {
     char* name = malloc(sizeof(char) * MAX_NAME_SIZE);
     get_player_name(name, MAX_NAME_SIZE);
     printf("Hello %s", name);
+
+    memset(&game, 0, sizeof(game));
+
+
+    init_board(&game.board);
+
     free(name);
+    free_board(&game.board);
 }
-
-

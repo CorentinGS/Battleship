@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * const.h                               /      | /  _____|    /       |      *
+ * board.c                               /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,38 +13,44 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_CONST_H
-#define BATTLESHIP_CONST_H
+#include <string.h>
+#include "board.h"
 
-#define MAX_NAME_SIZE 100
+/*
+ * This function is used to initialize the board in memory.
+*/
+void
+init_board(Board* board) {
+    /* malloc the board */
+    board->tiles = malloc(sizeof(Tile) * BOARD_WIDTH);
 
-/* Tile states enum */
-typedef enum {
-    TILE_STATE_EMPTY,
-    TILE_STATE_SHIP,
-    TILE_STATE_HIT,
-    TILE_STATE_BOMB
-} TileState;
+    /* malloc the tiles */
+    for (int i = 0; i < BOARD_WIDTH; ++i) {
+        board->tiles[i] = malloc(sizeof(Tile) * BOARD_HEIGHT);
+    }
 
-/* Ship size enum */
-typedef enum ship_size {
-    SHIP_FRIGATE_SIZE = 1,
-    SHIP_DESTROYER_SIZE = 2,
-    SHIP_CRUISER_SIZE = 3,
-    SHIP_CARRIER_SIZE = 4
-} ShipSize;
+    /* init the tiles */
+    for (int i = 0; i < BOARD_WIDTH; ++i) {
+        for (int j = 0; j < BOARD_HEIGHT; ++j) {
+            init_tile(&board->tiles[i][j]);
+        }
+    }
+}
 
-typedef enum ship_type {
-    SHIP_NONE,
-    SHIP_FRIGATE,
-    SHIP_DESTROYER,
-    SHIP_CRUISER,
-    SHIP_CARRIER
-} ShipType;
-
-typedef enum orientation {
-    ORIENTATION_HORIZONTAL,
-    ORIENTATION_VERTICAL
-} Orientation;
-
-#endif // BATTLESHIP_CONST_H
+/*
+ * This function is used to free the board in memory.
+*/
+void
+free_board(Board* board) {
+    for (int i = 0; i < BOARD_WIDTH; ++i) {
+        for (int j = 0; j < BOARD_HEIGHT; ++j) {
+            free_tile(&board->tiles[i][j]);
+        }
+        if (NULL != board->tiles[i]) {
+            free(board->tiles[i]);
+        }
+    }
+    if (NULL != board->tiles) {
+        free(board->tiles);
+    }
+}

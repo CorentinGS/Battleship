@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * const.h                               /      | /  _____|    /       |      *
+ * main.c                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,38 +13,15 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_CONST_H
-#define BATTLESHIP_CONST_H
+#ifndef BATTLESHIP_TILE_H
+#define BATTLESHIP_TILE_H
 
-#define MAX_NAME_SIZE 100
+#include "common.h"
 
-/* Tile states enum */
-typedef enum {
-    TILE_STATE_EMPTY,
-    TILE_STATE_SHIP,
-    TILE_STATE_HIT,
-    TILE_STATE_BOMB
-} TileState;
+extern void init_tile(Tile *tile);
+extern void set_tile_state(Tile *tile, TileState state);
+extern void set_tile_ship(Tile *tile, Ship *ship);
+extern void free_tile(Tile *tile);
 
-/* Ship size enum */
-typedef enum ship_size {
-    SHIP_FRIGATE_SIZE = 1,
-    SHIP_DESTROYER_SIZE = 2,
-    SHIP_CRUISER_SIZE = 3,
-    SHIP_CARRIER_SIZE = 4
-} ShipSize;
 
-typedef enum ship_type {
-    SHIP_NONE,
-    SHIP_FRIGATE,
-    SHIP_DESTROYER,
-    SHIP_CRUISER,
-    SHIP_CARRIER
-} ShipType;
-
-typedef enum orientation {
-    ORIENTATION_HORIZONTAL,
-    ORIENTATION_VERTICAL
-} Orientation;
-
-#endif // BATTLESHIP_CONST_H
+#endif //BATTLESHIP_TILE_H

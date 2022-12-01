@@ -18,26 +18,37 @@
 
 #include "utils/const.h"
 
+
 /* Player structure */
 typedef struct {
     char name[MAX_NAME_SIZE];
     int score;
 } Player;
 
-/* Board */
-typedef struct {
-    int size;
-    int** board;
-} Board;
-
-
 /* Ship */
 typedef struct {
-    int size;
-    int x;
-    int y;
+    ShipType type;
     int orientation;
 } Ship;
+
+
+/* Tile */
+typedef struct {
+    TileState state;
+    Ship *ship;
+} Tile;
+
+
+/* Board */
+typedef struct {
+    Tile** tiles;
+} Board;
+
+/* Game structure */
+typedef struct {
+    Board board;
+    Player player;
+} Game;
 
 
 #endif //BATTLESHIP_STRUCT_H
