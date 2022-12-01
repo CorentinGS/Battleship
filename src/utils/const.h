@@ -19,12 +19,7 @@
 #define MAX_NAME_SIZE 100
 
 /* Tile states enum */
-typedef enum {
-    TILE_STATE_EMPTY,
-    TILE_STATE_SHIP,
-    TILE_STATE_HIT,
-    TILE_STATE_BOMB
-} TileState;
+typedef enum { TILE_STATE_EMPTY, TILE_STATE_SHIP, TILE_STATE_HIT, TILE_STATE_BOMB } TileState;
 
 /* Ship size enum */
 typedef enum ship_size {
@@ -34,17 +29,8 @@ typedef enum ship_size {
     SHIP_CARRIER_SIZE = 4
 } ShipSize;
 
-typedef enum ship_type {
-    SHIP_NONE,
-    SHIP_FRIGATE,
-    SHIP_DESTROYER,
-    SHIP_CRUISER,
-    SHIP_CARRIER
-} ShipType;
+typedef enum ship_type { SHIP_NONE, SHIP_FRIGATE, SHIP_DESTROYER, SHIP_CRUISER, SHIP_CARRIER } ShipType;
 
-typedef enum orientation {
-    ORIENTATION_HORIZONTAL,
-    ORIENTATION_VERTICAL
-} Orientation;
+typedef enum orientation { ORIENTATION_HORIZONTAL, ORIENTATION_VERTICAL } Orientation;
 
 #endif

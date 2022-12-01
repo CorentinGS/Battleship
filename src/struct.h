@@ -18,7 +18,6 @@
 
 #include "utils/const.h"
 
-
 /* Player structure */
 typedef struct {
     char name[MAX_NAME_SIZE];
@@ -31,13 +30,11 @@ typedef struct {
     int orientation;
 } Ship;
 
-
 /* Tile */
 typedef struct {
     TileState state;
-    Ship *ship;
+    Ship* ship;
 } Tile;
-
 
 /* Board */
 typedef struct {
@@ -49,6 +46,5 @@ typedef struct {
     Board board;
     Player player;
 } Game;
-
 
 #endif

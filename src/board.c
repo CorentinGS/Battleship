@@ -44,7 +44,7 @@ init_board(Board* board) {
 */
 void
 free_board(Board* board) {
-        int i, j;
+    int i, j;
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
             free_tile(&board->tiles[i][j]);

@@ -19,7 +19,7 @@
 #include "common.h"
 #include "tile.h"
 
-extern void init_board(Board *board);
-extern void free_board(Board *board);
+extern void init_board(Board* board);
+extern void free_board(Board* board);
 
 #endif

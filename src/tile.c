@@ -18,7 +18,8 @@
 /*
  * This function is used to initialize the tile in memory.
  */
-void init_tile(Tile *tile) {
+void
+init_tile(Tile* tile) {
     tile->state = TILE_STATE_EMPTY;
     tile->ship = NULL;
 }
@@ -26,14 +27,16 @@ void init_tile(Tile *tile) {
 /*
  * This function is used to set the state of a tile.
  */
-void set_tile_state(Tile *tile, TileState state) {
+void
+set_tile_state(Tile* tile, TileState state) {
     tile->state = state;
 }
 
 /*
  * This function is used to set the ship of a tile.
  */
-void set_tile_ship(Tile *tile, Ship *ship) {
+void
+set_tile_ship(Tile* tile, Ship* ship) {
     tile->state = TILE_STATE_SHIP;
     tile->ship = ship;
 }
@@ -41,12 +44,11 @@ void set_tile_ship(Tile *tile, Ship *ship) {
 /*
  * This function is used to free the tile in memory.
  */
-void free_tile(Tile *tile) {
+void
+free_tile(Tile* tile) {
     tile->state = TILE_STATE_EMPTY;
     if (tile->ship != NULL) {
         free(tile->ship);
     }
     tile->ship = NULL;
 }
-
-

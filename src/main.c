@@ -21,7 +21,6 @@
 #include <malloc.h>
 #include <string.h>
 
-
 static void onClosing(void);
 
 int
@@ -39,8 +38,8 @@ main(int argc, char* argv[]) {
     free(name);
 }
 
-
-static void onClosing(void) {
+static void
+onClosing(void) {
     printf("Closing the game...\n");
     free_board(&game.board);
     printf("Game closed.\n");

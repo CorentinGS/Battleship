@@ -18,10 +18,9 @@
 
 #include "common.h"
 
-extern void init_tile(Tile *tile);
-extern void set_tile_state(Tile *tile, TileState state);
-extern void set_tile_ship(Tile *tile, Ship *ship);
-extern void free_tile(Tile *tile);
-
+extern void init_tile(Tile* tile);
+extern void set_tile_state(Tile* tile, TileState state);
+extern void set_tile_ship(Tile* tile, Ship* ship);
+extern void free_tile(Tile* tile);
 
 #endif
