@@ -22,4 +22,7 @@ main(int argc, char* argv[]) {
     char* name = malloc(sizeof(char) * MAX_NAME_SIZE);
     get_player_name(name, MAX_NAME_SIZE);
     printf("Hello %s", name);
+    free(name);
 }
+
+
