@@ -22,4 +22,4 @@
 extern void init_board(Board *board);
 extern void free_board(Board *board);
 
-#endif //BATTLESHIP_BOARD_H
+#endif

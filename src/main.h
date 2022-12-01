@@ -21,4 +21,4 @@
 Game game;
 
 
-#endif //BATTLESHIP_MAIN_H
+#endif

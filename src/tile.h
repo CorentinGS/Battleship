@@ -24,4 +24,4 @@ extern void set_tile_ship(Tile *tile, Ship *ship);
 extern void free_tile(Tile *tile);
 
 
-#endif //BATTLESHIP_TILE_H
+#endif

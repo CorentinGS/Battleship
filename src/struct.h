@@ -51,4 +51,4 @@ typedef struct {
 } Game;
 
 
-#endif //BATTLESHIP_STRUCT_H
+#endif

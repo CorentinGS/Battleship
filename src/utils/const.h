@@ -47,4 +47,4 @@ typedef enum orientation {
     ORIENTATION_VERTICAL
 } Orientation;
 
-#endif // BATTLESHIP_CONST_H
+#endif

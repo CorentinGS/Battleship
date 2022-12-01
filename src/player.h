@@ -18,4 +18,4 @@
 
 extern void get_player_name(char* name, int max_size);
 
-#endif // BATTLESHIP_PLAYER_H
+#endif

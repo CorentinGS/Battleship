@@ -21,17 +21,19 @@
 */
 void
 init_board(Board* board) {
+    int i, j;
+
     /* malloc the board */
     board->tiles = malloc(sizeof(Tile) * BOARD_WIDTH);
 
     /* malloc the tiles */
-    for (int i = 0; i < BOARD_WIDTH; ++i) {
+    for (i = 0; i < BOARD_WIDTH; ++i) {
         board->tiles[i] = malloc(sizeof(Tile) * BOARD_HEIGHT);
     }
 
     /* init the tiles */
-    for (int i = 0; i < BOARD_WIDTH; ++i) {
-        for (int j = 0; j < BOARD_HEIGHT; ++j) {
+    for (i = 0; i < BOARD_WIDTH; ++i) {
+        for (j = 0; j < BOARD_HEIGHT; ++j) {
             init_tile(&board->tiles[i][j]);
         }
     }
@@ -42,8 +44,9 @@ init_board(Board* board) {
 */
 void
 free_board(Board* board) {
-    for (int i = 0; i < BOARD_WIDTH; ++i) {
-        for (int j = 0; j < BOARD_HEIGHT; ++j) {
+        int i, j;
+    for (i = 0; i < BOARD_WIDTH; ++i) {
+        for (j = 0; j < BOARD_HEIGHT; ++j) {
             free_tile(&board->tiles[i][j]);
         }
         if (NULL != board->tiles[i]) {

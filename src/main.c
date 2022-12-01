@@ -21,6 +21,9 @@
 #include <malloc.h>
 #include <string.h>
 
+
+static void onClosing(void);
+
 int
 main(int argc, char* argv[]) {
     char* name = malloc(sizeof(char) * MAX_NAME_SIZE);
@@ -31,6 +34,14 @@ main(int argc, char* argv[]) {
 
     init_board(&game.board);
 
+    atexit(onClosing);
+
     free(name);
+}
+
+
+static void onClosing(void) {
+    printf("Closing the game...\n");
     free_board(&game.board);
+    printf("Game closed.\n");
 }

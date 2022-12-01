@@ -24,4 +24,4 @@
 #define SHIP_CRUISER_COUNT 2
 #define CARRIER_COUNT      1
 
-#endif //BATTLESHIP_CONFIG_H
+#endif

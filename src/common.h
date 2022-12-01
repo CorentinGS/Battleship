@@ -24,4 +24,4 @@
 
 #include "struct.h"
 
-#endif //BATTLESHIP_COMMON_H
+#endif

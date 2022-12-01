@@ -21,9 +21,9 @@
  * @param name The string where the name will be stored.
  * @param size The size of the string.
  */
-void get_player_name(char *name, const int size) {
-        printf("Please enter your name: ");
-        // We use fgets to read the name from stdin.
-        fgets(name, size, stdin);
+void
+get_player_name(char* name, const int size) {
+    printf("Please enter your name: ");
+    /* We use fgets instead of scanf because it is safer. */
+    fgets(name, size, stdin);
 }
-

@@ -16,7 +16,7 @@
 cmake_minimum_required(VERSION 3.23)
 project(Battleship C)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 90)
 
 add_executable(Battleship
         src/main.c src/player.c src/player.h src/utils/const.h src/struct.h src/utils/config.h src/board.c src/board.h src/tile.c src/tile.h src/common.h src/main.h)
