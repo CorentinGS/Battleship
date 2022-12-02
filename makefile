@@ -21,7 +21,7 @@
 ################################################################################
 
 # Name of the executable
-NAME	= C
+NAME	= Battleship
 
 # Name of the compiler
 CC 		= gcc
