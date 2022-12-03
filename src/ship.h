@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * player.c                              /      | /  _____|    /       |      *
+ * ship.h                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,22 +13,16 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "player.h"
-#include <stdio.h>
+#ifndef BATTLESHIP_SHIP_H
+#define BATTLESHIP_SHIP_H
 
-/*
- * This function is used to get the player's name from stdin.
- * @param name The string where the name will be stored.
- * @param size The size of the string.
- */
-int
-get_player_name(char* name, const int size) {
-    char* error;
-    printf("Please enter your name: ");
-    /* We use fgets instead of scanf because it is safer. */
-    error = fgets(name, size, stdin);
-    if (NULL == error) {
-        return 1;
-    }
-    return 0;
-}
+#include "common.h"
+
+extern void free_ship(Ship* ship);
+extern Ship* create_ship(void);
+extern void set_ship(Ship* ship, ShipType type, Orientation orientation);
+extern void set_ship_type(Ship* ship, ShipType type);
+extern void set_ship_orientation(Ship* ship, Orientation orientation);
+extern int get_ship_size(ShipType type);
+
+#endif //BATTLESHIP_SHIP_H

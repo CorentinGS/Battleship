@@ -14,6 +14,7 @@
  ******************************************************************************/
 
 #include "tile.h"
+#include "ship.h"
 
 /*
  * This function is used to initialize the tile in memory.
@@ -46,9 +47,9 @@ set_tile_ship(Tile* tile, Ship* ship) {
  */
 void
 free_tile(Tile* tile) {
-    tile->state = TILE_STATE_EMPTY;
-    if (tile->ship != NULL) {
-        free(tile->ship);
+    if (TILE_STATE_SHIP == tile->state) {
+        free_ship(tile->ship);
     }
+    tile->state = TILE_STATE_EMPTY;
     tile->ship = NULL;
 }

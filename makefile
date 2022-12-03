@@ -58,7 +58,7 @@ SRCS_PATH		= ./src
 
 INCLUDE_PATH	= ./src
 
-SRCS			= player.c board.c tile.c
+SRCS			= player.c board.c tile.c ship.c
 
 _OBJS += $(SRCS:.c=.o)
 

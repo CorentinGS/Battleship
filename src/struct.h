@@ -27,7 +27,7 @@ typedef struct {
 /* Ship */
 typedef struct {
     ShipType type;
-    int orientation;
+    Orientation orientation;
 } Ship;
 
 /* Tile */

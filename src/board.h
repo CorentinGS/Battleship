@@ -21,5 +21,6 @@
 
 extern void init_board(Board* board);
 extern void free_board(Board* board);
+extern int add_ship(Board* board, ShipType type, int x, int y, Orientation orientation);
 
 #endif

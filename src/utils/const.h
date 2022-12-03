@@ -33,4 +33,11 @@ typedef enum ship_type { SHIP_NONE, SHIP_FRIGATE, SHIP_DESTROYER, SHIP_CRUISER, 
 
 typedef enum orientation { ORIENTATION_HORIZONTAL, ORIENTATION_VERTICAL } Orientation;
 
+typedef enum error {
+    OK,
+    ERROR,
+    ERROR_SHIP_OUT_OF_BOUNDS,
+    ERROR_SHIP_OVERLAP,
+} ERROR_CODE;
+
 #endif
