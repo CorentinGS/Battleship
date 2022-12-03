@@ -42,8 +42,10 @@ init_board(Board* board) {
 
 /*
  * This function is used to create a ship at a given position.
+ * It returns 0 if the ship was created successfully.
+ * It returns ERROR_SHIP_OUT_OF_BOUNDS if the ship is out of bounds.
+ * It returns ERROR_SHIP_OVERLAP if the ship overlaps another ship.
  */
-
 int
 add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     int i;

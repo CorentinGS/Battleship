@@ -25,4 +25,4 @@ extern void set_ship_type(Ship* ship, ShipType type);
 extern void set_ship_orientation(Ship* ship, Orientation orientation);
 extern int get_ship_size(ShipType type);
 
-#endif //BATTLESHIP_SHIP_H
+#endif

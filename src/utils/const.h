@@ -37,7 +37,7 @@ typedef enum error {
     OK,
     ERROR,
     ERROR_SHIP_OUT_OF_BOUNDS,
-    ERROR_SHIP_OVERLAP,
+    ERROR_SHIP_OVERLAP
 } ERROR_CODE;
 
 #endif
