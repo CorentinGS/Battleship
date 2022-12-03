@@ -26,20 +26,25 @@ static void onClosing(void);
 static int get_debug_mode(void);
 static void run_debug_mode(void);
 
+/* Macro to determine if the program is running in debug mode. */
 #define IS_DEBUG_MODE (TRUE == get_debug_mode())
 
+/*
+ * Main function.
+ */
 int
 main(int argc, char* argv[]) {
     int err;
     char* name;
 
-    /* if (IS_DEBUG_MODE) { */
+    /* If the program is running in debug mode, run the tests. */
     if (IS_DEBUG_MODE) {
         printf("Debug mode is enabled\n");
         run_debug_mode();
         return OK;
     }
 
+    /* Get the player's name. */
     name = malloc(sizeof(char) * MAX_NAME_SIZE);
     err = get_player_name(name, MAX_NAME_SIZE);
     if (1 == err) {
@@ -49,8 +54,10 @@ main(int argc, char* argv[]) {
 
     printf("Hello %s\n", name);
 
+    /* Memset the game structure. */
     memset(&game, 0, sizeof(game));
 
+    /* Init the board. */
     init_board(&game.board);
 
     /* Add a ship to the board */
@@ -60,24 +67,36 @@ main(int argc, char* argv[]) {
         return 1;
     }
 
+    /* Display the board. */
     print_board(&game.board);
 
+    /* Free on exit. */
     atexit(onClosing);
 
+    /* Free the name. */
     free(name);
 
-    return 0;
+    /* Exit the program with no error. */
+    return OK;
 }
 
+/*
+ * Function called when the program is in debug mode.
+ */
 static void
 run_debug_mode(void) {
     printf("--------------------------------\n");
     printf(ANSI_COLOR_BLUE "Running tests ⤵️\n" ANSI_COLOR_RESET);
+    /* Run the tests. */
     run_tests();
     printf("--------------------------------\n");
     printf(ANSI_COLOR_GREEN "Tests finished with no errors ✅\n" ANSI_COLOR_RESET);
 }
 
+/*
+ * Function to determine if the program is running in debug mode.
+ * @return TRUE if the program is running in debug mode, FALSE otherwise.
+ */
 static int
 get_debug_mode(void) {
     char* debug;
@@ -91,9 +110,13 @@ get_debug_mode(void) {
     return RELEASE_MODE;
 }
 
+/*
+ * Function called when the program is closing.
+ */
 static void
 onClosing(void) {
     printf("Closing the game...\n");
+    /* Free the board. */
     free_board(&game.board);
     printf("Game closed.\n");
 }

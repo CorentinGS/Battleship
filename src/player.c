@@ -14,6 +14,7 @@
  ******************************************************************************/
 
 #include "player.h"
+#include "utils/const.h"
 #include <stdio.h>
 
 /*
@@ -28,7 +29,7 @@ get_player_name(char* name, const int size) {
     /* We use fgets instead of scanf because it is safer. */
     error = fgets(name, size, stdin);
     if (NULL == error) {
-        return 1;
+        return ERROR;
     }
-    return 0;
+    return OK;
 }

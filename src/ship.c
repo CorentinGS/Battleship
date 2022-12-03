@@ -15,46 +15,43 @@
 
 #include "ship.h"
 
+/*
+ * This function is used to create a new ship.
+ * @return a pointer to the new ship.
+ */
 Ship*
 create_ship(void) {
+    /* Allocate memory for the ship */
     Ship* ship = malloc(sizeof(*ship));
     if (NULL == ship) {
         fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
         exit(EXIT_FAILURE);
     }
+    /* Initialize the ship */
     ship->type = SHIP_NONE;
     ship->orientation = ORIENTATION_HORIZONTAL;
+    /* Allocate memory for the ship head */
     ship->head = malloc(sizeof(*ship->head) * COORDINATE_SIZE);
     if (NULL == ship->head) {
         fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
         exit(EXIT_FAILURE);
     }
+    /* Initialize the ship head */
     ship->head[0] = 0;
     ship->head[1] = 0;
 
+    /* Return the ship */
     return ship;
 }
 
-int*
-calculate_tail(Ship* ship) {
-    int* tail = malloc(sizeof(*tail) * COORDINATE_SIZE);
-    if (NULL == tail) {
-        fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
-        exit(EXIT_FAILURE);
-    }
-    tail[0] = ship->head[0];
-    tail[1] = ship->head[1];
-    switch (ship->orientation) {
-        case ORIENTATION_HORIZONTAL:
-            tail[0] += get_ship_size(ship->type) - 1;
-            break;
-        case ORIENTATION_VERTICAL:
-            tail[1] += get_ship_size(ship->type) - 1;
-            break;
-    }
-    return tail;
-}
-
+/*
+ * This function is used to set a ship.
+ * @param ship the ship to set.
+ * @param type the type of the ship.
+ * @param orientation the orientation of the ship.
+ * @param x the x coordinate of the ship head.
+ * @param y the y coordinate of the ship head.
+ */
 void
 set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y) {
     ship->type = type;
@@ -63,19 +60,14 @@ set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y) {
     ship->head[1] = y;
 }
 
-void
-set_ship_type(Ship* ship, ShipType type) {
-    ship->type = type;
-}
-
-void
-set_ship_orientation(Ship* ship, Orientation orientation) {
-    ship->orientation = orientation;
-}
-
+/*
+ * This function is used to free a ship.
+ * @param ship the ship to free.
+ */
 void
 free_ship(Ship* ship) {
     if (NULL != ship) {
+        /* Free the ship head */
         if (NULL != ship->head) {
             free(ship->head);
         }
@@ -83,11 +75,14 @@ free_ship(Ship* ship) {
     }
 }
 
+/*
+ * This function is used to get the size of a ship.
+ * @param type the type of the ship.
+ * @return the size of the ship.
+ */
 int
 get_ship_size(ShipType type) {
     switch (type) {
-        case SHIP_NONE:
-            return 0;
         case SHIP_CARRIER:
             return SHIP_CARRIER_SIZE;
         case SHIP_FRIGATE:
@@ -96,6 +91,7 @@ get_ship_size(ShipType type) {
             return SHIP_CRUISER_SIZE;
         case SHIP_DESTROYER:
             return SHIP_DESTROYER_SIZE;
+        case SHIP_NONE:
         default:
             return 0;
     }

@@ -59,7 +59,7 @@ SRCS_PATH		= ./src
 INCLUDE_PATH	= ./src
 
 SRCS			= player.c board.c tile.c ship.c
-SRCS           += test/test_handler.c test/test_board.c
+SRCS           += test/test_handler.c test/test_board.c test/test_ship.c
 
 _OBJS += $(SRCS:.c=.o)
 

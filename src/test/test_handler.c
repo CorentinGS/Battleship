@@ -15,8 +15,10 @@
 
 #include "test_handler.h"
 #include "test_board.h"
+#include "test_ship.h"
 
-void run_tests(void) {
+void
+run_tests(void) {
     test_board();
+    test_ship();
 }
-

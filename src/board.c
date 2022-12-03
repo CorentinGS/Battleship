@@ -139,6 +139,10 @@ free_board(Board* board) {
     }
 }
 
+/*
+ * This function is used to print the board.
+ * It prints the board in the console.
+ */
 void
 print_board(Board* board) {
     int y, x;
