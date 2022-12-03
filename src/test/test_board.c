@@ -30,7 +30,7 @@ static void
 test_add_ship(void) {
     Board board;
     int i, j, x, err;
-    printf(ANSI_COLOR_YELLOW "   ➡️ add_ship()  \n" ANSI_COLOR_RESET);
+    printf(ANSI_COLOR_MAGENTA "   ➡️ add_ship()  \n" ANSI_COLOR_RESET);
     for (x = SHIP_FRIGATE; x <= SHIP_CARRIER; ++x) {
         init_board(&board);
         err = add_ship(&board, x, 0, 0, ORIENTATION_HORIZONTAL);

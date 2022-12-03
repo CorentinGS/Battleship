@@ -55,7 +55,7 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
 
     /* check if the ship is out of bounds */
     if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
-        fprintf(stderr, "The ship is out of bounds.\n");
+        fprintf(stderr, ANSI_COLOR_WHITE "The ship is out of bounds.\n" ANSI_COLOR_RESET);
         return ERROR_SHIP_OUT_OF_BOUNDS;
     }
 
@@ -63,13 +63,13 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     if (ORIENTATION_HORIZONTAL == orientation) {
         x2 += get_ship_size(type) - 1;
         if (x2 < 0 || x2 >= BOARD_WIDTH) {
-            fprintf(stderr, "The ship is out of bounds.\n");
+            fprintf(stderr, ANSI_COLOR_WHITE "The ship is out of bounds.\n" ANSI_COLOR_RESET);
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     } else {
         y2 += get_ship_size(type) - 1;
         if (y2 < 0 || y2 >= BOARD_HEIGHT) {
-            fprintf(stderr, "The ship is out of bounds.\n");
+            fprintf(stderr, ANSI_COLOR_WHITE "The ship is out of bounds.\n" ANSI_COLOR_RESET);
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     }
@@ -77,7 +77,7 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     /* check if the ship is already placed */
     for (i = 0; i < get_ship_size(type); ++i) {
         if (board->tiles[x][y].state == TILE_STATE_SHIP) {
-            fprintf(stderr, "The ship is already placed.\n");
+            fprintf(stderr, ANSI_COLOR_WHITE "The ship is already placed.\n" ANSI_COLOR_RESET);
             return ERROR_SHIP_OVERLAP;
         }
         if (ORIENTATION_HORIZONTAL == orientation) {
@@ -92,7 +92,7 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     ship = create_ship();
 
     if (NULL == ship) {
-        fprintf(stderr, "Failed to create the ship.\n");
+        fprintf(stderr, ANSI_COLOR_WHITE "Failed to create the ship.\n" ANSI_COLOR_RESET);
         return ERROR_SHIP_CREATION;
     }
 

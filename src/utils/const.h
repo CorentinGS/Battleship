@@ -16,24 +16,24 @@
 #ifndef BATTLESHIP_CONST_H
 #define BATTLESHIP_CONST_H
 
-#define MAX_NAME_SIZE 100
+#define MAX_NAME_SIZE      100
 
-#define TRUE (1 == 1)
-#define FALSE (!TRUE)
+#define TRUE               (1 == 1)
+#define FALSE              (!TRUE)
 
-#define RELEASE_MODE 0
-#define DEBUG_MODE 1
+#define RELEASE_MODE       0
+#define DEBUG_MODE         1
 
-#define COORDINATE_SIZE 2
+#define COORDINATE_SIZE    2
 
-#define ANSI_COLOR_RED "\033[0;31m"
-#define ANSI_COLOR_GREEN "\033[0;32m"
-#define ANSI_COLOR_YELLOW "\033[0;33m"
-#define ANSI_COLOR_BLUE "\033[0;34m"
+#define ANSI_COLOR_RED     "\033[0;31m"
+#define ANSI_COLOR_GREEN   "\033[0;32m"
+#define ANSI_COLOR_YELLOW  "\033[0;33m"
+#define ANSI_COLOR_BLUE    "\033[0;34m"
 #define ANSI_COLOR_MAGENTA "\033[0;35m"
-#define ANSI_COLOR_CYAN "\033[0;36m"
-#define ANSI_COLOR_WHITE "\033[0;37m"
-#define ANSI_COLOR_RESET "\033[0m"
+#define ANSI_COLOR_CYAN    "\033[0;36m"
+#define ANSI_COLOR_WHITE   "\033[0;37m"
+#define ANSI_COLOR_RESET   "\033[0m"
 
 /* Tile states enum */
 typedef enum { TILE_STATE_EMPTY, TILE_STATE_SHIP, TILE_STATE_HIT, TILE_STATE_BOMB } TileState;
@@ -50,12 +50,6 @@ typedef enum ship_type { SHIP_NONE, SHIP_FRIGATE, SHIP_DESTROYER, SHIP_CRUISER, 
 
 typedef enum orientation { ORIENTATION_HORIZONTAL, ORIENTATION_VERTICAL } Orientation;
 
-typedef enum error {
-    OK,
-    ERROR,
-    ERROR_SHIP_OUT_OF_BOUNDS,
-    ERROR_SHIP_OVERLAP,
-    ERROR_SHIP_CREATION
-} ERROR_CODE;
+typedef enum error { OK, ERROR, ERROR_SHIP_OUT_OF_BOUNDS, ERROR_SHIP_OVERLAP, ERROR_SHIP_CREATION } ERROR_CODE;
 
 #endif
