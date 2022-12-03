@@ -28,12 +28,14 @@ typedef struct {
 typedef struct {
     ShipType type;
     Orientation orientation;
+    int *head;
 } Ship;
 
 /* Tile */
 typedef struct {
     TileState state;
     Ship* ship;
+    int* ship_head;
 } Tile;
 
 /* Board */

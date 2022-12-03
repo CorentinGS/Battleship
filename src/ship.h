@@ -20,7 +20,7 @@
 
 extern void free_ship(Ship* ship);
 extern Ship* create_ship(void);
-extern void set_ship(Ship* ship, ShipType type, Orientation orientation);
+extern void set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y);
 extern void set_ship_type(Ship* ship, ShipType type);
 extern void set_ship_orientation(Ship* ship, Orientation orientation);
 extern int get_ship_size(ShipType type);

@@ -13,16 +13,10 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_TILE_H
-#define BATTLESHIP_TILE_H
+#include "test_handler.h"
+#include "test_board.h"
 
-#include "common.h"
+void run_tests(void) {
+    test_board();
+}
 
-extern void init_tile(Tile* tile);
-extern void set_tile_state(Tile* tile, TileState state);
-extern void set_tile_ship(Tile* tile, Ship* ship);
-extern void set_tile_ship_head(Tile* tile, int x, int y);
-extern void free_tile(Board *board, int x, int y);
-extern void print_tile(Tile* tile);
-
-#endif

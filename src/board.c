@@ -48,7 +48,7 @@ init_board(Board* board) {
  */
 int
 add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
-    int i;
+    int i, hx, hy;
     int x2 = x;
     int y2 = y;
     Ship* ship;
@@ -91,17 +91,29 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     /* Remember to free the ship */
     ship = create_ship();
 
-    set_ship(ship, type, orientation);
+    if (NULL == ship) {
+        fprintf(stderr, "Failed to create the ship.\n");
+        return ERROR_SHIP_CREATION;
+    }
 
-    /* place the ship */
-    x = x2;
-    y = y2;
-    for (i = 0; i < get_ship_size(type); ++i) {
-        set_tile_ship(&board->tiles[x][y], ship);
+    if (ORIENTATION_HORIZONTAL == orientation) {
+        hx = x2 - get_ship_size(type) + 1;
+        hy = y2;
+    } else {
+        hx = x2;
+        hy = y2 - get_ship_size(type) + 1;
+    }
+    set_ship(ship, type, orientation, hx, hy);
+
+    /* place the head */
+    set_tile_ship(&board->tiles[hx][hy], ship);
+    /* place the body */
+    for (i = 1; i < get_ship_size(type); ++i) {
+        set_tile_ship_head(&board->tiles[x2][y2], ship->head[0], ship->head[1]);
         if (ORIENTATION_HORIZONTAL == orientation) {
-            --x;
+            --x2;
         } else {
-            --y;
+            --y2;
         }
     }
 
@@ -116,7 +128,7 @@ free_board(Board* board) {
     int i, j;
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
-            free_tile(&board->tiles[i][j]);
+            free_tile(board, i, j);
         }
         if (NULL != board->tiles[i]) {
             free(board->tiles[i]);
@@ -124,5 +136,16 @@ free_board(Board* board) {
     }
     if (NULL != board->tiles) {
         free(board->tiles);
+    }
+}
+
+void
+print_board(Board* board) {
+    int y, x;
+    for (y = 0; y < BOARD_HEIGHT; ++y) {
+        for (x = 0; x < BOARD_WIDTH; ++x) {
+            print_tile(&board->tiles[x][y]);
+        }
+        printf("\n");
     }
 }
