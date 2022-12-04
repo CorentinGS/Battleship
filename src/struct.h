@@ -21,7 +21,7 @@
 /* Player structure */
 typedef struct {
     char name[MAX_NAME_SIZE];
-    int score;
+    PlayerType type;
 } Player;
 
 /* Ship */
@@ -46,8 +46,13 @@ typedef struct {
 
 /* Game structure */
 typedef struct {
-    Board board;
-    Player player;
+    Board board1;
+    Board board2;
+    Player player1;
+    Player player2;
+    GameMode mode;
+    GameState state;
+    GameTurn turn;
 } Game;
 
 #endif

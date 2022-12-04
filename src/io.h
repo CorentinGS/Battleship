@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * player.c                              /      | /  _____|    /       |      *
+ * main.c                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,25 +13,11 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "player.h"
-#include "utils/const.h"
-#include <stdio.h>
+#ifndef BATTLESHIP_IO_H
+#define BATTLESHIP_IO_H
 
-/*
- * This function is used to get the player's name from stdin.
- * @param name The string where the name will be stored.
- * @param size The size of the string.
- */
-int
-get_player_name(char* name, const int size) {
-    char* error;
-    char ch;
-    printf("Please enter your name: ");
-    /* We use fgets instead of scanf because it is safer. */
-    error = fgets(name, size, stdin);
-    if (NULL == error) {
-        return ERROR;
-    }
+#include "common.h"
 
-    return OK;
-}
+extern void ask_coordinates(int* coordinates);
+
+#endif

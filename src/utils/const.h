@@ -62,4 +62,12 @@ typedef enum error {
     ERROR_TILE_NOT_SHIP
 } ERROR_CODE;
 
+typedef enum game_state { GAME_STATE_RUNNING, GAME_STATE_END } GameState;
+
+typedef enum game_mode { GAME_MODE_SINGLE, GAME_MODE_MULTI } GameMode;
+
+typedef enum player_type { PLAYER_TYPE_HUMAN, PLAYER_TYPE_AI } PlayerType;
+
+typedef enum game_turn { GAME_TURN_PLAYER1, GAME_TURN_PLAYER2 } GameTurn;
+
 #endif

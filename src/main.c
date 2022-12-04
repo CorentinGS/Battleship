@@ -20,6 +20,7 @@
 #include "board.h"
 #include "test/test_handler.h"
 #include "bomb.h"
+#include "io.h"
 #include <malloc.h>
 #include <string.h>
 
@@ -37,6 +38,7 @@ int
 main(int argc, char* argv[]) {
     int err;
     char* name;
+    int* coords;
 
     /* If the program is running in debug mode, run the tests. */
     if (IS_DEBUG_MODE) {
@@ -59,41 +61,49 @@ main(int argc, char* argv[]) {
     memset(&game, 0, sizeof(game));
 
     /* Init the board. */
-    init_board(&game.board);
+    init_board(&game.board1);
 
     /* Add a ship to the board */
-    err = add_ship(&game.board, SHIP_CARRIER, 0, 0, ORIENTATION_HORIZONTAL);
+    err = add_ship(&game.board1, SHIP_CARRIER, 0, 0, ORIENTATION_HORIZONTAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return 1;
     }
 
-    err = place_bomb(&game.board, 0, 0);
+    err = place_bomb(&game.board1, 0, 0);
     if (OK != err) {
         printf("Error: Couldn't place the bomb\n");
         return 1;
     }
 
     /* Display the board. */
-    display_board(&game.board);
+    display_board(&game.board1);
 
-    err = place_bomb(&game.board, 1, 0);
+    err = place_bomb(&game.board1, 1, 0);
     if (OK != err) {
         printf("Error: Couldn't place the bomb\n");
         return 1;
     }
-    err = place_bomb(&game.board, 2, 0);
+    err = place_bomb(&game.board1, 2, 0);
     if (OK != err) {
         printf("Error: Couldn't place the bomb\n");
         return 1;
     }
-    err = place_bomb(&game.board, 3, 0);
+    err = place_bomb(&game.board1, 3, 0);
     if (OK != err) {
         printf("Error: Couldn't place the bomb\n");
         return 1;
     }
 
-    display_board(&game.board);
+    coords = malloc(sizeof(int) * 2);
+    ask_coordinates(coords);
+
+    place_bomb(&game.board1, coords[0], coords[1]);
+    if (NULL != coords) {
+        free(coords);
+    }
+
+    display_board(&game.board1);
 
     /* Free on exit. */
     atexit(onClosing);
@@ -142,6 +152,6 @@ static void
 onClosing(void) {
     printf("Closing the game...\n");
     /* Free the board. */
-    free_board(&game.board);
+    free_board(&game.board1);
     printf("Game closed.\n");
 }
