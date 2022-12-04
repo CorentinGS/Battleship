@@ -68,7 +68,7 @@ main(int argc, char* argv[]) {
     }
 
     /* Display the board. */
-    print_board(&game.board);
+    display_board(&game.board);
 
     /* Free on exit. */
     atexit(onClosing);

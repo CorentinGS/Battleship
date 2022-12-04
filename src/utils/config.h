@@ -17,7 +17,7 @@
 #define BATTLESHIP_CONFIG_H
 
 #define BOARD_WIDTH        20
-#define BOARD_HEIGHT       20
+#define BOARD_HEIGHT       10
 
 #define FRIGATE_COUNT      1
 #define DESTROYER_COUNT    1

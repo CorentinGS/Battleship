@@ -89,16 +89,16 @@ void
 print_tile(Tile* tile) {
     switch (tile->state) {
         case TILE_STATE_EMPTY:
-            printf("_");
+            printf("_ ");
             break;
         case TILE_STATE_SHIP:
-            printf("S");
+            printf(ANSI_COLOR_BLUE "S " ANSI_COLOR_RESET);
             break;
         case TILE_STATE_BOMB:
-            printf("B");
+            printf("B ");
             break;
         case TILE_STATE_HIT:
-            printf("H");
+            printf("H ");
             break;
         default:
             printf(" ");

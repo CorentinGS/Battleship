@@ -142,11 +142,42 @@ free_board(Board* board) {
 /*
  * This function is used to print the board.
  * It prints the board in the console.
+ * It's used for debugging.
  */
 void
 print_board(Board* board) {
     int y, x;
     for (y = 0; y < BOARD_HEIGHT; ++y) {
+        for (x = 0; x < BOARD_WIDTH; ++x) {
+            print_tile(&board->tiles[x][y]);
+        }
+        printf("\n");
+    }
+}
+
+/*
+ * This function is used to display the board with coordinates and ships.
+ * It prints the board in the console.
+ * Coordinates are displayed on the left and on the top.
+ */
+void
+display_board(Board* board) {
+    int y, x;
+    printf("    ");
+    for (x = 0; x < BOARD_WIDTH; ++x) {
+        printf("%c ", 'A' + x);
+    }
+    /* Add spacer */
+    printf("\n");
+    printf("  ");
+        for (x = 0; x < BOARD_WIDTH; ++x) {
+                printf("--");
+        }
+        printf("\n");
+
+    for (y = 0; y < BOARD_HEIGHT; ++y) {
+        /* Display the y coordinate using 2 digits */
+        printf("%02d| ", y + 1);
         for (x = 0; x < BOARD_WIDTH; ++x) {
             print_tile(&board->tiles[x][y]);
         }
