@@ -73,7 +73,7 @@ free_tile(Board* board, int x, int y) {
         free(tile->ship_head);
     }
 
-    if (TILE_STATE_SHIP == tile->state) {
+    if (TILE_STATE_SHIP == tile->state || TILE_STATE_HIT == tile->state) {
         if (NULL != tile->ship) {
             free_ship(tile->ship);
         }
@@ -104,4 +104,12 @@ print_tile(Tile* tile) {
             printf(" ");
             break;
     }
+}
+
+/*
+ * This function is used to check if the tile is a ship.
+ */
+int
+is_tile_ship(Tile* tile) {
+    return TILE_STATE_SHIP == tile->state;
 }

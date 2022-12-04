@@ -13,17 +13,39 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_BOARD_H
-#define BATTLESHIP_BOARD_H
+#include "bomb.h"
+#include "board.h"
+#include "ship.h"
 
-#include "common.h"
-#include "tile.h"
+/*
+ * This function is used to place a bomb on the map.
+ * If the bomb is placed on a ship, the ship is hit. If the ship is destroyed, the ship is removed from the map.
+ * If the bomb is placed on the water, the bomb is placed on the map.
+ * If the bomb is placed on a bomb, the bomb is not placed on the map.
+ * @param board The board on which the bomb is placed.
+ * @param x The x coordinate of the bomb.
+ * @param y The y coordinate of the bomb.
+ * @return 0 if the bomb is placed on the map
+ */
+int
+place_bomb(Board* board, int x, int y) {
+    Tile* tile;
+    int error;
+    error = is_in_bounds(board, x, y);
+    if (ERROR_TILE_OUT_OF_BOUNDS == error) {
+        return error;
+    }
 
-extern void init_board(Board* board);
-extern void free_board(Board* board);
-extern int add_ship(Board* board, ShipType type, int x, int y, Orientation orientation);
-extern void print_board(Board* board);
-extern void display_board(Board* board);
-extern int is_in_bounds(Board* board, int x, int y);
+    tile = &board->tiles[x][y];
 
-#endif
+    if (TILE_STATE_BOMB == tile->state) {
+        return INFO_BOMB_OVERLAP;
+    }
+    if (TILE_STATE_SHIP == tile->state) {
+        error = hit_ship(board, x, y);
+        return error;
+    }
+    tile->state = TILE_STATE_BOMB;
+
+    return OK;
+}

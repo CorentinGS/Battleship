@@ -155,6 +155,14 @@ print_board(Board* board) {
     }
 }
 
+int
+is_in_bounds(Board* board, int x, int y) {
+    if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+        return ERROR_TILE_OUT_OF_BOUNDS;
+    }
+    return OK;
+}
+
 /*
  * This function is used to display the board with coordinates and ships.
  * It prints the board in the console.
@@ -170,10 +178,10 @@ display_board(Board* board) {
     /* Add spacer */
     printf("\n");
     printf("  ");
-        for (x = 0; x < BOARD_WIDTH; ++x) {
-                printf("--");
-        }
-        printf("\n");
+    for (x = 0; x < BOARD_WIDTH; ++x) {
+        printf("--");
+    }
+    printf("\n");
 
     for (y = 0; y < BOARD_HEIGHT; ++y) {
         /* Display the y coordinate using 2 digits */

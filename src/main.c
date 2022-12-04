@@ -19,6 +19,7 @@
 #include "player.h"
 #include "board.h"
 #include "test/test_handler.h"
+#include "bomb.h"
 #include <malloc.h>
 #include <string.h>
 
@@ -67,7 +68,31 @@ main(int argc, char* argv[]) {
         return 1;
     }
 
+    err = place_bomb(&game.board, 0, 0);
+    if (OK != err) {
+        printf("Error: Couldn't place the bomb\n");
+        return 1;
+    }
+
     /* Display the board. */
+    display_board(&game.board);
+
+    err = place_bomb(&game.board, 1, 0);
+    if (OK != err) {
+        printf("Error: Couldn't place the bomb\n");
+        return 1;
+    }
+    err = place_bomb(&game.board, 2, 0);
+    if (OK != err) {
+        printf("Error: Couldn't place the bomb\n");
+        return 1;
+    }
+    err = place_bomb(&game.board, 3, 0);
+    if (OK != err) {
+        printf("Error: Couldn't place the bomb\n");
+        return 1;
+    }
+
     display_board(&game.board);
 
     /* Free on exit. */
