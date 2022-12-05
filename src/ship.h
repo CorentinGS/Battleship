@@ -28,5 +28,7 @@ extern int is_ship_destroyed(Ship* ship, Board* board);
 extern int hit_ship(Board* board, int x, int y);
 extern int remove_ship(Board* board, Ship* ship);
 extern Ship* get_ship_at(Board* board, int x, int y);
+extern int get_ships(Board* board, int** ships);
+extern int check_ships(Board* board);
 
 #endif

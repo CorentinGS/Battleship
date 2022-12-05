@@ -222,3 +222,51 @@ display_board_hidden(Board* board) {
         printf("\n");
     }
 }
+
+/*
+ * This function is used to return the coordinates of every ship on the board.
+ * It returns the number of ships.
+ * It returns the ships in the ships array.
+ * The ships array must be allocated and freed by the caller.
+ */
+int
+get_ships(Board* board, int** ships) {
+    int i, j, k;
+    int count = 0;
+    int* ship;
+    for (i = 0; i < BOARD_WIDTH; ++i) {
+        for (j = 0; j < BOARD_HEIGHT; ++j) {
+            if (board->tiles[i][j].state == TILE_STATE_SHIP) {
+                if (board->tiles[i][j].ship_head[0] == i && board->tiles[i][j].ship_head[1] == j) {
+                    ++count;
+                    ships[count - 1][0] = i;
+                    ships[count - 1][1] = j;
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
+/*
+ * This function is used to check if there are any ships left on the board.
+ * It returns the number of ships left.
+ */
+int
+check_ships(Board* board) {
+    int i, j, k;
+    int count = 0;
+    for (i = 0; i < BOARD_WIDTH; ++i) {
+        for (j = 0; j < BOARD_HEIGHT; ++j) {
+            if (board->tiles[i][j].state == TILE_STATE_SHIP) {
+                if (board->tiles[i][j].ship_head[0] == i && board->tiles[i][j].ship_head[1] == j) {
+                    ++count;
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
