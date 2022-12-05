@@ -77,7 +77,7 @@ MAIN			= main.c
 
 SHELL := /bin/bash
 
-#OBJS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.o})
+OBJS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.o})
 OBJ_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.o})
 DEPS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.d})
 DEPS_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.d})
