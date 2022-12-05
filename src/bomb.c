@@ -31,7 +31,7 @@ int
 place_bomb(Board* board, int x, int y) {
     Tile* tile;
     int error;
-    error = is_in_bounds(board, x, y);
+    error = is_in_bounds(x, y);
     if (ERROR_TILE_OUT_OF_BOUNDS == error) {
         return error;
     }

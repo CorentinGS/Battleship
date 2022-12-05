@@ -147,7 +147,7 @@ hit_ship(Board* board, int x, int y) {
     Tile* tile;
     int error;
     Ship* ship;
-    error = is_in_bounds(board, x, y);
+    error = is_in_bounds(x, y);
     if (ERROR_TILE_OUT_OF_BOUNDS == error) {
         return ERROR_TILE_OUT_OF_BOUNDS;
     }
@@ -207,7 +207,7 @@ Ship*
 get_ship_at(Board* board, int x, int y) {
     int error, head_x, head_y;
     /* Check if the coordinates are in bounds */
-    error = is_in_bounds(board, x, y);
+    error = is_in_bounds(x, y);
     if (ERROR_TILE_OUT_OF_BOUNDS == error) {
         return NULL;
     }

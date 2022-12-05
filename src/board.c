@@ -157,7 +157,7 @@ print_board(Board* board) {
 }
 
 int
-is_in_bounds(Board* board, int x, int y) {
+is_in_bounds(int x, int y) {
     if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
         return ERROR_TILE_OUT_OF_BOUNDS;
     }

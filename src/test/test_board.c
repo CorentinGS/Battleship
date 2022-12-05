@@ -21,6 +21,7 @@
 static void test_add_ship(void);
 static void test_get_ships(void);
 static void test_check_ships(void);
+static void test_is_in_bounds(void);
 
 void
 test_board(void) {
@@ -28,6 +29,7 @@ test_board(void) {
     test_add_ship();
     test_get_ships();
     test_check_ships();
+    test_is_in_bounds();
 }
 
 static void
@@ -133,5 +135,17 @@ test_check_ships(void) {
     hit_ship(&board, 3, 9);
     assert(1 == check_ships(&board));
 
+    free_board(&board);
+}
+
+static void
+test_is_in_bounds(void) {
+    Board board;
+    init_board(&board);
+    printf(ANSI_COLOR_MAGENTA "   ➡️ is_in_bounds()  \n" ANSI_COLOR_RESET);
+    assert(is_in_bounds(0, 0) == OK);
+    assert(is_in_bounds(BOARD_WIDTH - 1, BOARD_HEIGHT - 1) == OK);
+    assert(is_in_bounds(BOARD_WIDTH, BOARD_HEIGHT) == ERROR_TILE_OUT_OF_BOUNDS);
+    assert(is_in_bounds(-1, -1) == ERROR_TILE_OUT_OF_BOUNDS);
     free_board(&board);
 }
