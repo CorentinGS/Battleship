@@ -70,6 +70,9 @@ main(int argc, char* argv[]) {
         return 1;
     }
 
+    /* Print the board. */
+    display_board_hidden(&game.board1);
+
     err = place_bomb(&game.board1, 0, 0);
     if (OK != err) {
         printf("Error: Couldn't place the bomb\n");

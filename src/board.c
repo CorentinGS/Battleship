@@ -192,3 +192,33 @@ display_board(Board* board) {
         printf("\n");
     }
 }
+
+/*
+ * This function is used to display the board with coordinates but hidden ships.
+ * It prints the board in the console.
+ * Coordinates are displayed on the left and on the top.
+ */
+void
+display_board_hidden(Board* board) {
+    int y, x;
+    printf("    ");
+    for (x = 0; x < BOARD_WIDTH; ++x) {
+        printf("%c ", 'A' + x);
+    }
+    /* Add spacer */
+    printf("\n");
+    printf("  ");
+    for (x = 0; x < BOARD_WIDTH; ++x) {
+        printf("--");
+    }
+    printf("\n");
+
+    for (y = 0; y < BOARD_HEIGHT; ++y) {
+        /* Display the y coordinate using 2 digits */
+        printf("%02d| ", y + 1);
+        for (x = 0; x < BOARD_WIDTH; ++x) {
+            print_tile_hidden(&board->tiles[x][y]);
+        }
+        printf("\n");
+    }
+}

@@ -95,10 +95,10 @@ print_tile(Tile* tile) {
             printf(ANSI_COLOR_BLUE "S " ANSI_COLOR_RESET);
             break;
         case TILE_STATE_BOMB:
-            printf("B ");
+            printf(ANSI_COLOR_RED "B "ANSI_COLOR_RESET);
             break;
         case TILE_STATE_HIT:
-            printf("H ");
+            printf(ANSI_COLOR_GREEN "H "ANSI_COLOR_RESET);
             break;
         default:
             printf(" ");
@@ -107,9 +107,23 @@ print_tile(Tile* tile) {
 }
 
 /*
- * This function is used to check if the tile is a ship.
+ * This function is used to print the tile but with hidden ships.
  */
-int
-is_tile_ship(Tile* tile) {
-    return TILE_STATE_SHIP == tile->state;
+void
+print_tile_hidden(Tile* tile) {
+    switch (tile->state) {
+        case TILE_STATE_EMPTY:
+        case TILE_STATE_SHIP:
+            printf("_ ");
+            break;
+        case TILE_STATE_BOMB:
+            printf(ANSI_COLOR_RED"B "ANSI_COLOR_RESET);
+            break;
+        case TILE_STATE_HIT:
+            printf(ANSI_COLOR_GREEN"H "ANSI_COLOR_RESET);
+            break;
+        default:
+            printf(" ");
+            break;
+    }
 }

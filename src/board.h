@@ -22,8 +22,8 @@
 extern void init_board(Board* board);
 extern void free_board(Board* board);
 extern int add_ship(Board* board, ShipType type, int x, int y, Orientation orientation);
-extern void print_board(Board* board);
 extern void display_board(Board* board);
 extern int is_in_bounds(Board* board, int x, int y);
+void display_board_hidden(Board* board);
 
 #endif
