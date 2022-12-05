@@ -13,17 +13,46 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_TILE_H
-#define BATTLESHIP_TILE_H
+#include <malloc.h>
+#include "io.h"
 
-#include "common.h"
+static void get_input_coords(char* input);
+static void convert_input_to_coordinates(const char* input, int* coordinates);
 
-extern void init_tile(Tile* tile);
-extern void set_tile_state(Tile* tile, TileState state);
-extern void set_tile_ship(Tile* tile, Ship* ship);
-extern void set_tile_ship_head(Tile* tile, int x, int y);
-extern void free_tile(Board* board, int x, int y);
-extern void print_tile(Tile* tile);
-extern void print_tile_hidden(Tile* tile);
+void
+ask_coordinates(int* coordinates) {
+    char* input;
 
-#endif
+    input = malloc(sizeof(*input) * 3);
+    get_input_coords(input);
+    convert_input_to_coordinates(input, coordinates);
+    free(input);
+}
+
+static void
+get_input_coords(char* input) {
+    int ch;
+    printf("Enter coordinates: ");
+
+    fgets(input, 3, stdin);
+    /* clear the buffer */
+
+    while (((ch = getchar()) != EOF) && (ch != '\n')) {
+        ;
+    }
+
+    /* input is of the form "A1" */
+    /* check if input is valid */
+    /* if not, ask again */
+    /* Max letter is 'A' + WIDTH - 1 */
+    if (input[0] < 'A' || input[0] > 'A' + BOARD_WIDTH - 1 || input[1] < '1' || input[1] > '1' + '9') {
+        printf("Invalid input. Please enter a valid input.\n");
+        get_input_coords(input);
+    }
+}
+
+static void
+convert_input_to_coordinates(const char* input, int* coordinates) {
+    coordinates[0] = input[0] - 'A';
+    coordinates[1] = input[1] - '1';
+}

@@ -14,6 +14,7 @@
  ******************************************************************************/
 
 #include "player.h"
+#include "utils/const.h"
 #include <stdio.h>
 
 /*
@@ -21,9 +22,16 @@
  * @param name The string where the name will be stored.
  * @param size The size of the string.
  */
-void
+int
 get_player_name(char* name, const int size) {
+    char* error;
+    char ch;
     printf("Please enter your name: ");
     /* We use fgets instead of scanf because it is safer. */
-    fgets(name, size, stdin);
+    error = fgets(name, size, stdin);
+    if (NULL == error) {
+        return ERROR;
+    }
+
+    return OK;
 }

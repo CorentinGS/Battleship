@@ -30,7 +30,7 @@ CC 		= gcc
 CFLAGS	= -Wall -std=c90 -ansi -pedantic
 CFLAGS	+= -funroll-loops -fsanitize=address,undefined -fno-omit-frame-pointer -fno-optimize-sibling-calls -fvisibility=hidden
 CFLAGS  += -Werror -Os -g
-CFLAGS  += -Wextra -Wno-unused-parameter -Wno-unused-variable -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wstrict-prototypes -Wwrite-strings -Waggregate-return -Wunreachable-code
+CFLAGS  += -Wextra -Wno-unused-parameter -Winit-self -Wno-unused-variable -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wstrict-prototypes -Wwrite-strings -Waggregate-return -Wunreachable-code
 DFLAGS	= -MMD -MF $(@:.o=.d)
 
 # MISC
@@ -58,7 +58,9 @@ SRCS_PATH		= ./src
 
 INCLUDE_PATH	= ./src
 
-SRCS			= player.c board.c tile.c
+SRCS			= player.c board.c tile.c ship.c bomb.c io.c
+SRCS           += utils/utils.c
+SRCS           += test/test_handler.c test/test_board.c test/test_ship.c
 
 _OBJS += $(SRCS:.c=.o)
 
@@ -76,7 +78,7 @@ MAIN			= main.c
 
 SHELL := /bin/bash
 
-#OBJS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.o})
+OBJS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.o})
 OBJ_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.o})
 DEPS				= $(addprefix objs/, ${SRCS:$(FILE_EXTENSION)=.d})
 DEPS_MAIN			= $(addprefix objs/, ${MAIN:$(FILE_EXTENSION)=.d})

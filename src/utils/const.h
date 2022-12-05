@@ -16,7 +16,24 @@
 #ifndef BATTLESHIP_CONST_H
 #define BATTLESHIP_CONST_H
 
-#define MAX_NAME_SIZE 100
+#define MAX_NAME_SIZE      100
+
+#define TRUE               (1 == 1)
+#define FALSE              (!TRUE)
+
+#define RELEASE_MODE       0
+#define DEBUG_MODE         1
+
+#define COORDINATE_SIZE    2
+
+#define ANSI_COLOR_RED     "\033[0;31m"
+#define ANSI_COLOR_GREEN   "\033[0;32m"
+#define ANSI_COLOR_YELLOW  "\033[0;33m"
+#define ANSI_COLOR_BLUE    "\033[0;34m"
+#define ANSI_COLOR_MAGENTA "\033[0;35m"
+#define ANSI_COLOR_CYAN    "\033[0;36m"
+#define ANSI_COLOR_WHITE   "\033[0;37m"
+#define ANSI_COLOR_RESET   "\033[0m"
 
 /* Tile states enum */
 typedef enum { TILE_STATE_EMPTY, TILE_STATE_SHIP, TILE_STATE_HIT, TILE_STATE_BOMB } TileState;
@@ -32,5 +49,25 @@ typedef enum ship_size {
 typedef enum ship_type { SHIP_NONE, SHIP_FRIGATE, SHIP_DESTROYER, SHIP_CRUISER, SHIP_CARRIER } ShipType;
 
 typedef enum orientation { ORIENTATION_HORIZONTAL, ORIENTATION_VERTICAL } Orientation;
+
+typedef enum error {
+    OK,
+    ERROR,
+    ERROR_SHIP_OUT_OF_BOUNDS,
+    ERROR_SHIP_OVERLAP,
+    ERROR_SHIP_CREATION,
+    INFO_BOMB_OVERLAP,
+    ERROR_TILE_OUT_OF_BOUNDS,
+    INFO_TILE_ALREADY_HIT,
+    ERROR_TILE_NOT_SHIP
+} ERROR_CODE;
+
+typedef enum game_state { GAME_STATE_RUNNING, GAME_STATE_END } GameState;
+
+typedef enum game_mode { GAME_MODE_SINGLE, GAME_MODE_MULTI } GameMode;
+
+typedef enum player_type { PLAYER_TYPE_HUMAN, PLAYER_TYPE_AI } PlayerType;
+
+typedef enum game_turn { GAME_TURN_PLAYER1, GAME_TURN_PLAYER2 } GameTurn;
 
 #endif

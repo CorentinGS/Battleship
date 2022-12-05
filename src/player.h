@@ -16,6 +16,6 @@
 #ifndef BATTLESHIP_PLAYER_H
 #define BATTLESHIP_PLAYER_H
 
-extern void get_player_name(char* name, int max_size);
+extern int get_player_name(char* name, int max_size);
 
 #endif

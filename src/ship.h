@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * config.h                              /      | /  _____|    /       |      *
+ * ship.h                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,17 +13,20 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_CONFIG_H
-#define BATTLESHIP_CONFIG_H
+#ifndef BATTLESHIP_SHIP_H
+#define BATTLESHIP_SHIP_H
 
-#define BOARD_WIDTH        20
-#define BOARD_HEIGHT       10
+#include "common.h"
 
-#define FRIGATE_COUNT      1
-#define DESTROYER_COUNT    1
-#define SHIP_CRUISER_COUNT 1
-#define CARRIER_COUNT      1
-
-#define NUMBER_OF_SHIPS    (FRIGATE_COUNT + DESTROYER_COUNT + SHIP_CRUISER_COUNT + CARRIER_COUNT)
+extern void free_ship(Ship* ship);
+extern Ship* create_ship(void);
+extern void set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y);
+extern void set_ship_type(Ship* ship, ShipType type);
+extern void set_ship_orientation(Ship* ship, Orientation orientation);
+extern int get_ship_size(ShipType type);
+extern int is_ship_destroyed(Ship* ship, Board* board);
+extern int hit_ship(Board* board, int x, int y);
+extern int remove_ship(Board* board, Ship* ship);
+extern Ship* get_ship_at(Board* board, int x, int y);
 
 #endif
