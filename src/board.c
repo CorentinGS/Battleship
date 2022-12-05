@@ -16,6 +16,7 @@
 #include <string.h>
 #include "board.h"
 #include "ship.h"
+#include "utils/utils.h"
 
 /*
  * This function is used to initialize the board in memory.
@@ -231,19 +232,32 @@ display_board_hidden(Board* board) {
  */
 int
 get_ships(Board* board, int** ships) {
-    int i, j, k;
+    int i, j, id;
     int count = 0;
     int* ship;
+
+    int* excluded;
+
+    excluded = (int*)malloc(sizeof(int) * NUMBER_OF_SHIPS);
+
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
             if (board->tiles[i][j].state == TILE_STATE_SHIP) {
-                if (board->tiles[i][j].ship_head[0] == i && board->tiles[i][j].ship_head[1] == j) {
-                    ++count;
-                    ships[count - 1][0] = i;
-                    ships[count - 1][1] = j;
+                if (board->tiles[i][j].state == TILE_STATE_SHIP) {
+                    /* check if the id is in the excluded list */
+                    id = get_ship_at(board, i, j)->id;
+                    if (!is_in_array(excluded, NUMBER_OF_SHIPS, id)) {
+                        excluded[count++] = id;
+                        ships[count - 1][0] = i;
+                        ships[count - 1][1] = j;
+                    }
                 }
             }
         }
+    }
+
+    if (NULL != excluded) {
+        free(excluded);
     }
 
     return count;
@@ -255,18 +269,27 @@ get_ships(Board* board, int** ships) {
  */
 int
 check_ships(Board* board) {
-    int i, j, k;
-    int count = 0;
+    int i, j, id, count;
+    int* excluded;
+
+    excluded = (int*)malloc(sizeof(int) * NUMBER_OF_SHIPS);
+
+    count = 0;
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
             if (board->tiles[i][j].state == TILE_STATE_SHIP) {
-                if (board->tiles[i][j].ship_head[0] == i && board->tiles[i][j].ship_head[1] == j) {
-                    ++count;
+                /* check if the id is in the excluded list */
+                id = get_ship_at(board, i, j)->id;
+                if (!is_in_array(excluded, NUMBER_OF_SHIPS, id)) {
+                    excluded[count++] = id;
                 }
             }
         }
     }
 
+    if (NULL != excluded) {
+        free(excluded);
+    }
+
     return count;
 }
-

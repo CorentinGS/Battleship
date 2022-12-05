@@ -117,9 +117,21 @@ test_check_ships(void) {
     err = add_ship(&board, SHIP_CARRIER, 2, 3, ORIENTATION_VERTICAL);
     assert(err == OK);
     err = add_ship(&board, SHIP_CRUISER, 1, 9, ORIENTATION_HORIZONTAL);
+    assert(err == OK);
 
     x = check_ships(&board);
     assert(x == 3);
+
+    hit_ship(&board, 0, 0);
+    assert(2 == check_ships(&board));
+
+    hit_ship(&board, 1, 9);
+    assert(2 == check_ships(&board));
+
+    hit_ship(&board, 2, 9);
+    assert(2 == check_ships(&board));
+    hit_ship(&board, 3, 9);
+    assert(1 == check_ships(&board));
 
     free_board(&board);
 }

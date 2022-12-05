@@ -29,7 +29,7 @@ typedef struct {
     ShipType type;
     Orientation orientation;
     int* head;
-    int destroyed;
+    int id;
 } Ship;
 
 /* Tile */

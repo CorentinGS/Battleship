@@ -35,6 +35,8 @@
 #define ANSI_COLOR_WHITE   "\033[0;37m"
 #define ANSI_COLOR_RESET   "\033[0m"
 
+
+
 /* Tile states enum */
 typedef enum { TILE_STATE_EMPTY, TILE_STATE_SHIP, TILE_STATE_HIT, TILE_STATE_BOMB } TileState;
 

@@ -16,6 +16,8 @@
 #include "ship.h"
 #include "board.h"
 
+static int get_unique_ship_id(void);
+
 /*
  * This function is used to create a new ship.
  * @return a pointer to the new ship.
@@ -41,8 +43,16 @@ create_ship(void) {
     ship->head[0] = 0;
     ship->head[1] = 0;
 
+    ship->id = get_unique_ship_id();
+
     /* Return the ship */
     return ship;
+}
+
+static int
+get_unique_ship_id(void) {
+    static int id = 0;
+    return id++;
 }
 
 /*
@@ -59,7 +69,6 @@ set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y) {
     ship->orientation = orientation;
     ship->head[0] = x;
     ship->head[1] = y;
-    ship->destroyed = FALSE;
 }
 
 /*
