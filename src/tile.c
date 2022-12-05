@@ -95,10 +95,10 @@ print_tile(Tile* tile) {
             printf(ANSI_COLOR_BLUE "S " ANSI_COLOR_RESET);
             break;
         case TILE_STATE_BOMB:
-            printf(ANSI_COLOR_RED "B "ANSI_COLOR_RESET);
+            printf(ANSI_COLOR_RED "B " ANSI_COLOR_RESET);
             break;
         case TILE_STATE_HIT:
-            printf(ANSI_COLOR_GREEN "H "ANSI_COLOR_RESET);
+            printf(ANSI_COLOR_GREEN "H " ANSI_COLOR_RESET);
             break;
         default:
             printf(" ");
@@ -117,10 +117,10 @@ print_tile_hidden(Tile* tile) {
             printf("_ ");
             break;
         case TILE_STATE_BOMB:
-            printf(ANSI_COLOR_RED"B "ANSI_COLOR_RESET);
+            printf(ANSI_COLOR_RED "B " ANSI_COLOR_RESET);
             break;
         case TILE_STATE_HIT:
-            printf(ANSI_COLOR_GREEN"H "ANSI_COLOR_RESET);
+            printf(ANSI_COLOR_GREEN "H " ANSI_COLOR_RESET);
             break;
         default:
             printf(" ");

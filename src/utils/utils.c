@@ -16,7 +16,8 @@
 #include "utils.h"
 #include "const.h"
 
-int is_in_array(const int* array, int size, int value) {
+int
+is_in_array(const int* array, int size, int value) {
     int i;
     for (i = 0; i < size; i++) {
         if (array[i] == value) {

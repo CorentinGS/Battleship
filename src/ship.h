@@ -29,5 +29,4 @@ extern int hit_ship(Board* board, int x, int y);
 extern int remove_ship(Board* board, Ship* ship);
 extern Ship* get_ship_at(Board* board, int x, int y);
 
-
 #endif
