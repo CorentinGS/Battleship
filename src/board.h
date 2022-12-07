@@ -16,8 +16,12 @@
 #ifndef BATTLESHIP_BOARD_H
 #define BATTLESHIP_BOARD_H
 
+#include <string.h>
+
 #include "common.h"
+
 #include "tile.h"
+#include "ship.h"
 
 extern void init_board(Board* board);
 extern void free_board(Board* board);

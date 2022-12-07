@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * bomb.h                                /      | /  _____|    /       |      *
+ * main.c                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,14 +13,9 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_BOMB_H
-#define BATTLESHIP_BOMB_H
+#include "game.h"
 
-#include "common.h"
-
-#include "board.h"
-#include "ship.h"
-
-extern int place_bomb(Board* board, int x, int y);
-
-#endif
+int
+game_loop(void) {
+    return 0;
+}

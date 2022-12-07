@@ -17,5 +17,6 @@
 #define BATTLESHIP_UTILS_H
 
 extern int is_in_array(const int* array, int size, int value);
+extern void get_random_ai_name(char* name);
 
 #endif

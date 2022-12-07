@@ -18,6 +18,8 @@
 
 #include "common.h"
 
+#include "ship.h"
+
 extern void init_tile(Tile* tile);
 extern void set_tile_state(Tile* tile, TileState state);
 extern void set_tile_ship(Tile* tile, Ship* ship);

@@ -15,18 +15,12 @@
 
 #include "main.h"
 
-#include "utils/const.h"
-#include "player.h"
-#include "board.h"
-#include "test/test_handler.h"
-#include "bomb.h"
-#include "io.h"
-#include <malloc.h>
-#include <string.h>
 
 static void onClosing(void);
 static int get_debug_mode(void);
 static void run_debug_mode(void);
+static void free_game(void);
+static void free_player(Player* player);
 
 /* Macro to determine if the program is running in debug mode. */
 #define IS_DEBUG_MODE (TRUE == get_debug_mode())
@@ -37,7 +31,6 @@ static void run_debug_mode(void);
 int
 main(int argc, char* argv[]) {
     int err;
-    char* name;
     int* coords;
 
     /* If the program is running in debug mode, run the tests. */
@@ -47,56 +40,20 @@ main(int argc, char* argv[]) {
         return OK;
     }
 
-    /* Get the player's name. */
-    name = malloc(sizeof(char) * MAX_NAME_SIZE);
-    err = get_player_name(name, MAX_NAME_SIZE);
-    if (1 == err) {
-        printf("Error: Couldn't get the name\n");
-        return 1;
-    }
-
-    printf("Hello %s\n", name);
-
     /* Memset the game structure. */
     memset(&game, 0, sizeof(game));
 
-    /* Init the board. */
-    init_board(&game.board1);
-
-    /* Add a ship to the board */
-    err = add_ship(&game.board1, SHIP_CARRIER, 0, 0, ORIENTATION_HORIZONTAL);
+    /* Init the game. */
+    err = init_game();
     if (OK != err) {
-        printf("Error: Couldn't add the ship\n");
-        return 1;
+        return err;
     }
 
     /* Print the board. */
-    display_board_hidden(&game.board1);
-
-    err = place_bomb(&game.board1, 0, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
+    display_board_hidden(&game.board2);
 
     /* Display the board. */
     display_board(&game.board1);
-
-    err = place_bomb(&game.board1, 1, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
-    err = place_bomb(&game.board1, 2, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
-    err = place_bomb(&game.board1, 3, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
 
     coords = malloc(sizeof(int) * 2);
     ask_coordinates(coords);
@@ -110,9 +67,6 @@ main(int argc, char* argv[]) {
 
     /* Free on exit. */
     atexit(onClosing);
-
-    /* Free the name. */
-    free(name);
 
     /* Exit the program with no error. */
     return OK;
@@ -148,6 +102,19 @@ get_debug_mode(void) {
     return RELEASE_MODE;
 }
 
+static void
+free_game(void) {
+    free_player(&game.player1);
+    free_player(&game.player2);
+}
+
+static void
+free_player(Player* player) {
+    if (NULL != player->name) {
+        free(player->name);
+    }
+}
+
 /*
  * Function called when the program is closing.
  */
@@ -156,5 +123,6 @@ onClosing(void) {
     printf("Closing the game...\n");
     /* Free the board. */
     free_board(&game.board1);
+    free_game();
     printf("Game closed.\n");
 }
