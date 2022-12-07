@@ -16,7 +16,13 @@
 #ifndef BATTLESHIP_INIT_H
 #define BATTLESHIP_INIT_H
 
-#include "struct.h"
+#include <string.h>
+
+#include "common.h"
+#include "board.h"
+#include "player.h"
+#include "ship.h"
+
 extern int init_game(void);
 
 extern Game game;

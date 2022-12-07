@@ -13,16 +13,9 @@
  *                                                                            *
  ******************************************************************************/
 
-#include <string.h>
 #include "init.h"
-#include "board.h"
-#include "player.h"
-#include "utils/utils.h"
-#include "ship.h"
-#include "io.h"
 
 static void init_boards(void);
-
 static void init_game_mode(void);
 static int init_players(void);
 static int init_ships(Board* board);

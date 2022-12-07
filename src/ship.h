@@ -18,6 +18,8 @@
 
 #include "common.h"
 
+#include "board.h"
+
 extern void free_ship(Ship* ship);
 extern void set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y);
 extern void set_ship_type(Ship* ship, ShipType type);

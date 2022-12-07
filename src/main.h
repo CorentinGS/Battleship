@@ -16,7 +16,17 @@
 #ifndef BATTLESHIP_MAIN_H
 #define BATTLESHIP_MAIN_H
 
+#include <malloc.h>
+#include <string.h>
+
 #include "common.h"
+
+#include "board.h"
+#include "bomb.h"
+#include "io.h"
+#include "init.h"
+
+#include "test/test_handler.h"
 
 Game game;
 

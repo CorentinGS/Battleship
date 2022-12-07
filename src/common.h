@@ -21,6 +21,7 @@
 
 #include "utils/const.h"
 #include "utils/config.h"
+#include "utils/utils.h"
 
 #include "struct.h"
 

@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * main.c                                /      | /  _____|    /       |      *
+ * bomb.c                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -14,8 +14,7 @@
  ******************************************************************************/
 
 #include "bomb.h"
-#include "board.h"
-#include "ship.h"
+
 
 /*
  * This function is used to place a bomb on the map.

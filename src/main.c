@@ -15,15 +15,6 @@
 
 #include "main.h"
 
-#include "utils/const.h"
-#include "player.h"
-#include "board.h"
-#include "test/test_handler.h"
-#include "bomb.h"
-#include "io.h"
-#include "init.h"
-#include <malloc.h>
-#include <string.h>
 
 static void onClosing(void);
 static int get_debug_mode(void);

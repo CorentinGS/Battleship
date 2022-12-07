@@ -13,10 +13,7 @@
  *                                                                            *
  ******************************************************************************/
 
-#include <string.h>
 #include "board.h"
-#include "ship.h"
-#include "utils/utils.h"
 
 /*
  * This function is used to initialize the board in memory.

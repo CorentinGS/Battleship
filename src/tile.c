@@ -14,7 +14,6 @@
  ******************************************************************************/
 
 #include "tile.h"
-#include "ship.h"
 
 /*
  * This function is used to initialize the tile in memory.

@@ -16,6 +16,8 @@
 #ifndef BATTLESHIP_IO_H
 #define BATTLESHIP_IO_H
 
+#include <malloc.h>
+
 #include "common.h"
 
 extern void ask_coordinates(int* coordinates);

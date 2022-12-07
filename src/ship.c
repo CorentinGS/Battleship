@@ -14,7 +14,6 @@
  ******************************************************************************/
 
 #include "ship.h"
-#include "board.h"
 
 static int get_unique_ship_id(void);
 

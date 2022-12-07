@@ -14,7 +14,6 @@
  ******************************************************************************/
 
 #include "player.h"
-#include <stdio.h>
 
 /*
  * This function is used to get the player's name from stdin.

@@ -13,7 +13,6 @@
  *                                                                            *
  ******************************************************************************/
 
-#include <malloc.h>
 #include "io.h"
 
 static void get_input_coords(char* input);
