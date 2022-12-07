@@ -297,7 +297,6 @@ move_ship(Board* board, Ship* ship, int v) {
     } else {
         if (-1 == v) {
             /* Move each tile of the ship to the bottom */
-            printf("move ship to bottom");
             for (i = size - 1; i >= 0; --i) {
                 state = TILE_STATE_BOMB == board->tiles[x][y + i + 1].state ? TILE_STATE_HIT : TILE_STATE_SHIP;
                 board->tiles[x][y + i + 1] = board->tiles[x][y + i];
@@ -310,7 +309,6 @@ move_ship(Board* board, Ship* ship, int v) {
             }
         } else {
             /* Move each tile of the ship to the top */
-            printf("in");
             for (i = 0; i < size; ++i) {
                 state = TILE_STATE_BOMB == board->tiles[x][y + i - 1].state ? TILE_STATE_HIT : TILE_STATE_SHIP;
                 board->tiles[x][y + i - 1] = board->tiles[x][y + i];
