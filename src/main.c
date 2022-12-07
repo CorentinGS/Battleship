@@ -27,6 +27,8 @@
 static void onClosing(void);
 static int get_debug_mode(void);
 static void run_debug_mode(void);
+static void free_game(void);
+static void free_player(Player* player);
 
 /* Macro to determine if the program is running in debug mode. */
 #define IS_DEBUG_MODE (TRUE == get_debug_mode())
@@ -148,6 +150,19 @@ get_debug_mode(void) {
     return RELEASE_MODE;
 }
 
+static void
+free_game(void) {
+    free_player(&game.player1);
+    free_player(&game.player2);
+}
+
+static void
+free_player(Player* player) {
+    if (NULL != player->name) {
+        free(player->name);
+    }
+}
+
 /*
  * Function called when the program is closing.
  */
@@ -156,5 +171,6 @@ onClosing(void) {
     printf("Closing the game...\n");
     /* Free the board. */
     free_board(&game.board1);
+    free_game();
     printf("Game closed.\n");
 }

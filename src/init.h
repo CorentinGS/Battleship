@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * player.h                              /      | /  _____|    /       |      *
+ * main.c                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,12 +13,12 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_PLAYER_H
-#define BATTLESHIP_PLAYER_H
+#ifndef BATTLESHIP_INIT_H
+#define BATTLESHIP_INIT_H
 
-#include "common.h"
+#include "struct.h"
+extern int init_game(void);
 
-extern int get_player_name(char* name, int max_size);
-extern Player create_player(void);
+extern Game game;
 
 #endif

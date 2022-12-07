@@ -20,7 +20,7 @@
 
 /* Player structure */
 typedef struct {
-    char name[MAX_NAME_SIZE];
+    char *name;
     PlayerType type;
 } Player;
 
