@@ -193,20 +193,15 @@ test_move_ship(void) {
     if (OK != err) {
         printf("Error: %d", err);
     }
-    display_board(&board);
 
     assert(get_ship_at(&board, 2, 2) == NULL);
     assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 4)->type == SHIP_DESTROYER);
-
     move_ship(&board, ship2, 1);
-    display_board(&board);
 
     assert(get_ship_at(&board, 2, 4) == NULL);
     assert(get_ship_at(&board, 2, 2)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
-
-    display_board(&board);
 
     free_board(&board);
 }
