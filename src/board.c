@@ -77,7 +77,7 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
 
     /* check if the ship is already placed */
     for (i = 0; i < get_ship_size(type); ++i) {
-        if (board->tiles[x][y].state == TILE_STATE_SHIP) {
+        if (TILE_STATE_SHIP == board->tiles[x][y].state) {
             fprintf(stderr, ANSI_COLOR_WHITE "The ship is already placed.\n" ANSI_COLOR_RESET);
             return ERROR_SHIP_OVERLAP;
         }
@@ -242,8 +242,8 @@ get_ships(Board* board, int** ships) {
 
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
-            if (board->tiles[i][j].state == TILE_STATE_SHIP) {
-                if (board->tiles[i][j].state == TILE_STATE_SHIP) {
+            if (TILE_STATE_SHIP == board->tiles[i][j].state) {
+                if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                     /* check if the id is in the excluded list */
                     id = get_ship_at(board, i, j)->id;
                     if (!is_in_array(excluded, NUMBER_OF_SHIPS, id)) {
@@ -277,7 +277,7 @@ check_ships(Board* board) {
     count = 0;
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
-            if (board->tiles[i][j].state == TILE_STATE_SHIP) {
+            if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                 /* check if the id is in the excluded list */
                 id = get_ship_at(board, i, j)->id;
                 if (!is_in_array(excluded, NUMBER_OF_SHIPS, id)) {
