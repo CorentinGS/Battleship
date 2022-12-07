@@ -25,6 +25,7 @@ static void test_is_ship_destroyed(void);
 static void test_hit_ship(void);
 static void test_unique_ship_id(void);
 static void test_get_ship_at(void);
+static void test_move_ship(void);
 
 void
 test_ship(void) {
@@ -36,6 +37,7 @@ test_ship(void) {
     test_hit_ship();
     test_unique_ship_id();
     test_get_ship_at();
+    test_move_ship();
 }
 
 static void
@@ -166,5 +168,45 @@ test_get_ship_at(void) {
     assert(get_ship_at(&board, 2, 2)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 4) == NULL);
+    free_board(&board);
+}
+
+static void
+test_move_ship(void) {
+    Board board;
+    Ship *ship, *ship2;
+    int err;
+    init_board(&board);
+    printf(ANSI_COLOR_MAGENTA "   ➡️ move_ship()  \n" ANSI_COLOR_RESET);
+    add_ship(&board, SHIP_FRIGATE, 0, 0, ORIENTATION_HORIZONTAL);
+    ship = get_ship_at(&board, 0, 0);
+    move_ship(&board, ship, -1);
+    assert(get_ship_at(&board, 0, 0) == NULL);
+    assert(get_ship_at(&board, 1, 0)->type == SHIP_FRIGATE);
+    move_ship(&board, ship, 1);
+    assert(get_ship_at(&board, 1, 0) == NULL);
+    assert(get_ship_at(&board, 0, 0)->type == SHIP_FRIGATE);
+
+    add_ship(&board, SHIP_DESTROYER, 2, 2, ORIENTATION_VERTICAL);
+    ship2 = get_ship_at(&board, 2, 2);
+    err = move_ship(&board, ship2, -1);
+    if (OK != err) {
+        printf("Error: %d", err);
+    }
+    display_board(&board);
+
+    assert(get_ship_at(&board, 2, 2) == NULL);
+    assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
+    assert(get_ship_at(&board, 2, 4)->type == SHIP_DESTROYER);
+
+    move_ship(&board, ship2, 1);
+    display_board(&board);
+
+    assert(get_ship_at(&board, 2, 4) == NULL);
+    assert(get_ship_at(&board, 2, 2)->type == SHIP_DESTROYER);
+    assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
+
+    display_board(&board);
+
     free_board(&board);
 }

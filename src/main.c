@@ -41,7 +41,7 @@ main(int argc, char* argv[]) {
     int* coords;
 
     /* If the program is running in debug mode, run the tests. */
-    if (IS_DEBUG_MODE) {
+    if (TRUE) {
         printf("Debug mode is enabled\n");
         run_debug_mode();
         return OK;

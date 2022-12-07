@@ -66,6 +66,9 @@ test_add_ship(void) {
     assert(err == OK);
     err = add_ship(&board, SHIP_FRIGATE, 0, 2, ORIENTATION_HORIZONTAL);
     assert(err == ERROR_SHIP_OVERLAP);
+    err = add_ship(&board, SHIP_CARRIER, 8, 0, ORIENTATION_VERTICAL);
+    assert(err == OK);
+
     free_board(&board);
 }
 
