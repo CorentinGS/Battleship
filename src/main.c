@@ -21,6 +21,7 @@
 #include "test/test_handler.h"
 #include "bomb.h"
 #include "io.h"
+#include "init.h"
 #include <malloc.h>
 #include <string.h>
 
@@ -39,7 +40,6 @@ static void free_player(Player* player);
 int
 main(int argc, char* argv[]) {
     int err;
-    char* name;
     int* coords;
 
     /* If the program is running in debug mode, run the tests. */
@@ -49,56 +49,20 @@ main(int argc, char* argv[]) {
         return OK;
     }
 
-    /* Get the player's name. */
-    name = malloc(sizeof(char) * MAX_NAME_SIZE);
-    err = get_player_name(name, MAX_NAME_SIZE);
-    if (1 == err) {
-        printf("Error: Couldn't get the name\n");
-        return 1;
-    }
-
-    printf("Hello %s\n", name);
-
     /* Memset the game structure. */
     memset(&game, 0, sizeof(game));
 
-    /* Init the board. */
-    init_board(&game.board1);
-
-    /* Add a ship to the board */
-    err = add_ship(&game.board1, SHIP_CARRIER, 0, 0, ORIENTATION_HORIZONTAL);
+    /* Init the game. */
+    err = init_game();
     if (OK != err) {
-        printf("Error: Couldn't add the ship\n");
-        return 1;
+        return err;
     }
 
     /* Print the board. */
-    display_board_hidden(&game.board1);
-
-    err = place_bomb(&game.board1, 0, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
+    display_board_hidden(&game.board2);
 
     /* Display the board. */
     display_board(&game.board1);
-
-    err = place_bomb(&game.board1, 1, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
-    err = place_bomb(&game.board1, 2, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
-    err = place_bomb(&game.board1, 3, 0);
-    if (OK != err) {
-        printf("Error: Couldn't place the bomb\n");
-        return 1;
-    }
 
     coords = malloc(sizeof(int) * 2);
     ask_coordinates(coords);
@@ -112,9 +76,6 @@ main(int argc, char* argv[]) {
 
     /* Free on exit. */
     atexit(onClosing);
-
-    /* Free the name. */
-    free(name);
 
     /* Exit the program with no error. */
     return OK;

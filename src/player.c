@@ -35,12 +35,15 @@ get_player_name(char* name, const int size) {
     return OK;
 }
 
-Player
+Player*
 create_player(void) {
-    Player player;
+    Player* player;
     char* name;
 
-    player.name = malloc(sizeof(player.name) * MAX_NAME_SIZE);
-    player.type = PLAYER_TYPE_HUMAN;
+    /* Allocate memory for the player. */
+    player = malloc(sizeof(*player));
+
+    player->name = malloc(sizeof(player->name) * MAX_NAME_SIZE);
+    player->type = PLAYER_TYPE_HUMAN;
     return player;
 }

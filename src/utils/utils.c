@@ -35,5 +35,5 @@ get_random_ai_name(char* name) {
     const char COMPUTER_NAMES[2][MAX_NAME_SIZE] = {"Totoro", "TOTO"};
 
     srand(time(NULL));
-    strcpy(name, COMPUTER_NAMES[rand() % 2])
+    strcpy(name, COMPUTER_NAMES[rand() % 2]);
 }

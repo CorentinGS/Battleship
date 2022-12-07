@@ -19,6 +19,6 @@
 #include "common.h"
 
 extern int get_player_name(char* name, int max_size);
-extern Player create_player(void);
+extern Player* create_player(void);
 
 #endif
