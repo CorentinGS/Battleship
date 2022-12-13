@@ -14,8 +14,43 @@
  ******************************************************************************/
 
 #include "game.h"
+#include "io.h"
+#include "bomb.h"
+
+#define forever       for (;;)
+#define CHANGE_PLAYER (game->turn = (game->turn + 1) % 2)
 
 int
-game_loop(void) {
+game_loop(Game* game) {
+
+    int *coords, err;
+    coords = malloc_prof(sizeof(int) * 2);
+    forever {
+        if (game->turn == GAME_TURN_PLAYER1) {
+            display_board_hidden(&game->board2);
+            ask_coordinates(coords);
+
+            err = place_bomb(&game->board2, coords[0], coords[1]);
+            if (err != OK) {
+                printf("You already bombed this place!\n");
+                continue;
+            }
+            CHANGE_PLAYER;
+        } else {
+            display_board_hidden(&game->board1);
+            ask_coordinates(coords);
+
+            err = place_bomb(&game->board1, coords[0], coords[1]);
+            if (err != OK) {
+                printf("You already bombed this place!\n");
+                continue;
+            }
+            CHANGE_PLAYER;
+            break;
+        }
+    }
+
+    free_prof(coords);
+
     return 0;
 }

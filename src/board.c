@@ -22,12 +22,12 @@ void
 init_board(Board* board) {
     int i, j;
 
-    /* malloc the board */
-    board->tiles = malloc(sizeof(Tile) * BOARD_WIDTH);
+    /* malloc_prof the board */
+    board->tiles = malloc_prof(sizeof(Tile) * BOARD_WIDTH);
 
-    /* malloc the tiles */
+    /* malloc_prof the tiles */
     for (i = 0; i < BOARD_WIDTH; ++i) {
-        board->tiles[i] = malloc(sizeof(Tile) * BOARD_HEIGHT);
+        board->tiles[i] = malloc_prof(sizeof(Tile) * BOARD_HEIGHT);
     }
 
     /* init the tiles */
@@ -86,7 +86,7 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     }
 
     /* create the ship */
-    /* Remember to free the ship */
+    /* Remember to free_prof the ship */
     ship = create_ship();
 
     if (NULL == ship) {
@@ -119,21 +119,21 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
 }
 
 /*
- * This function is used to free the board in memory.
+ * This function is used to free_prof the board in memory.
  */
 void
-free_board(Board* board) {
+free_prof_board(Board* board) {
     int i, j;
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
-            free_tile(board, i, j);
+            free_prof_tile(board, i, j);
         }
         if (NULL != board->tiles[i]) {
-            free(board->tiles[i]);
+            free_prof(board->tiles[i]);
         }
     }
     if (NULL != board->tiles) {
-        free(board->tiles);
+        free_prof(board->tiles);
     }
 }
 
@@ -225,7 +225,7 @@ display_board_hidden(Board* board) {
  * This function is used to return the coordinates of every ship on the board.
  * It returns the number of ships.
  * It returns the ships in the ships array.
- * The ships array must be allocated and freed by the caller.
+ * The ships array must be allocated and free_profd by the caller.
  */
 int
 get_ships(Board* board, int** ships) {
@@ -235,7 +235,7 @@ get_ships(Board* board, int** ships) {
 
     int* excluded;
 
-    excluded = (int*)malloc(sizeof(int) * NUMBER_OF_SHIPS);
+    excluded = (int*)malloc_prof(sizeof(int) * NUMBER_OF_SHIPS);
 
     for (i = 0; i < BOARD_WIDTH; ++i) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
@@ -254,7 +254,7 @@ get_ships(Board* board, int** ships) {
     }
 
     if (NULL != excluded) {
-        free(excluded);
+        free_prof(excluded);
     }
 
     return count;
@@ -269,7 +269,7 @@ check_ships(Board* board) {
     int i, j, id, count;
     int* excluded;
 
-    excluded = (int*)malloc(sizeof(int) * NUMBER_OF_SHIPS);
+    excluded = (int*)malloc_prof(sizeof(int) * NUMBER_OF_SHIPS);
 
     count = 0;
     for (i = 0; i < BOARD_WIDTH; ++i) {
@@ -285,7 +285,7 @@ check_ships(Board* board) {
     }
 
     if (NULL != excluded) {
-        free(excluded);
+        free_prof(excluded);
     }
 
     return count;

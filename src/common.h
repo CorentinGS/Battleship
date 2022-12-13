@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "libs/stdprof.h"
+
 #include "utils/const.h"
 #include "utils/config.h"
 #include "utils/utils.h"

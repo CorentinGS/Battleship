@@ -24,18 +24,18 @@ static int get_unique_ship_id(void);
 Ship*
 create_ship(void) {
     /* Allocate memory for the ship */
-    Ship* ship = malloc(sizeof(*ship));
+    Ship* ship = malloc_prof(sizeof(*ship));
     if (NULL == ship) {
-        fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
+        fprintf(stderr, "Error: malloc_prof_ship: malloc_prof failed.\n");
         exit(EXIT_FAILURE);
     }
     /* Initialize the ship */
     ship->type = SHIP_NONE;
     ship->orientation = ORIENTATION_HORIZONTAL;
     /* Allocate memory for the ship head */
-    ship->head = malloc(sizeof(*ship->head) * COORDINATE_SIZE);
+    ship->head = malloc_prof(sizeof(*ship->head) * COORDINATE_SIZE);
     if (NULL == ship->head) {
-        fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
+        fprintf(stderr, "Error: malloc_prof_ship: malloc_prof failed.\n");
         exit(EXIT_FAILURE);
     }
     /* Initialize the ship head */
@@ -71,17 +71,17 @@ set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y) {
 }
 
 /*
- * This function is used to free a ship.
- * @param ship the ship to free.
+ * This function is used to free_prof a ship.
+ * @param ship the ship to free_prof.
  */
 void
-free_ship(Ship* ship) {
+free_prof_ship(Ship* ship) {
     if (NULL != ship) {
-        /* Free the ship head */
+        /* free_prof the ship head */
         if (NULL != ship->head) {
-            free(ship->head);
+            free_prof(ship->head);
         }
-        free(ship);
+        free_prof(ship);
     }
 }
 
@@ -191,7 +191,7 @@ remove_ship(Board* board, Ship* ship) {
         }
     }
 
-    free_ship(ship);
+    free_prof_ship(ship);
     return OK;
 }
 

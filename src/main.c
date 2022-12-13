@@ -14,13 +14,13 @@
  ******************************************************************************/
 
 #include "main.h"
-
+#include "game.h"
 
 static void onClosing(void);
 static int get_debug_mode(void);
 static void run_debug_mode(void);
-static void free_game(void);
-static void free_player(Player* player);
+static void free_prof_game(void);
+static void free_prof_player(Player* player);
 
 /* Macro to determine if the program is running in debug mode. */
 #define IS_DEBUG_MODE (TRUE == get_debug_mode())
@@ -49,23 +49,27 @@ main(int argc, char* argv[]) {
         return err;
     }
 
-    /* Print the board. */
+    game_loop(&game);
+
+    /*    */ /* Print the board. */ /*
     display_board_hidden(&game.board2);
 
-    /* Display the board. */
+    */
+    /* Display the board. */        /*
     display_board(&game.board1);
 
-    coords = malloc(sizeof(int) * 2);
+    coords = malloc_prof(sizeof(int) * 2);
     ask_coordinates(coords);
 
     place_bomb(&game.board1, coords[0], coords[1]);
     if (NULL != coords) {
-        free(coords);
+        free_prof(coords);
     }
 
     display_board(&game.board1);
 
-    /* Free on exit. */
+    */
+    /* free_prof on exit.   */
     atexit(onClosing);
 
     /* Exit the program with no error. */
@@ -103,15 +107,15 @@ get_debug_mode(void) {
 }
 
 static void
-free_game(void) {
-    free_player(&game.player1);
-    free_player(&game.player2);
+free_prof_game(void) {
+    free_prof_player(&game.player1);
+    free_prof_player(&game.player2);
 }
 
 static void
-free_player(Player* player) {
+free_prof_player(Player* player) {
     if (NULL != player->name) {
-        free(player->name);
+        free_prof(player->name);
     }
 }
 
@@ -121,8 +125,8 @@ free_player(Player* player) {
 static void
 onClosing(void) {
     printf("Closing the game...\n");
-    /* Free the board. */
-    free_board(&game.board1);
-    free_game();
+    /* free_prof the board. */
+    free_prof_board(&game.board1);
+    free_prof_game();
     printf("Game closed.\n");
 }

@@ -22,10 +22,10 @@ void
 ask_coordinates(int* coordinates) {
     char* input;
 
-    input = malloc(sizeof(*input) * 3);
+    input = malloc_prof(sizeof(*input) * 3);
     get_input_coords(input);
     convert_input_to_coordinates(input, coordinates);
-    free(input);
+    free_prof(input);
 }
 
 static void

@@ -16,7 +16,6 @@
 #ifndef BATTLESHIP_MAIN_H
 #define BATTLESHIP_MAIN_H
 
-#include <malloc.h>
 #include <string.h>
 
 #include "common.h"

@@ -18,6 +18,6 @@
 
 #include "common.h"
 
-extern int game_loop(void);
+extern int game_loop(Game *game);
 
 #endif

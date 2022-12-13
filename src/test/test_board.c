@@ -44,7 +44,7 @@ test_add_ship(void) {
         for (i = 0; i < get_ship_size(x); ++i) {
             assert(board.tiles[i][0].state == TILE_STATE_SHIP);
         }
-        free_board(&board);
+        free_prof_board(&board);
     }
     for (x = SHIP_FRIGATE; x <= SHIP_CARRIER; ++x) {
         init_board(&board);
@@ -54,7 +54,7 @@ test_add_ship(void) {
         for (i = 0; i < get_ship_size(x); ++i) {
             assert(board.tiles[0][i].state == TILE_STATE_SHIP);
         }
-        free_board(&board);
+        free_prof_board(&board);
     }
 
     init_board(&board);
@@ -69,7 +69,7 @@ test_add_ship(void) {
     err = add_ship(&board, SHIP_CARRIER, 8, 0, ORIENTATION_VERTICAL);
     assert(err == OK);
 
-    free_board(&board);
+    free_prof_board(&board);
 }
 
 static void
@@ -85,9 +85,9 @@ test_get_ships(void) {
     assert(err == OK);
     err = add_ship(&board, SHIP_CRUISER, 1, 9, ORIENTATION_HORIZONTAL);
 
-    ships = malloc(sizeof(int*) * 3);
+    ships = malloc_prof(sizeof(int*) * 3);
     for (i = 0; i < 3; ++i) {
-        ships[i] = malloc(sizeof(int) * 2);
+        ships[i] = malloc_prof(sizeof(int) * 2);
     }
     x = get_ships(&board, ships);
     assert(x == 3);
@@ -100,14 +100,14 @@ test_get_ships(void) {
 
     for (i = 0; i < 3; ++i) {
         if (NULL != ships[i]) {
-            free(ships[i]);
+            free_prof(ships[i]);
         }
     }
     if (NULL != ships) {
-        free(ships);
+        free_prof(ships);
     }
 
-    free_board(&board);
+    free_prof_board(&board);
 }
 
 static void
@@ -138,7 +138,7 @@ test_check_ships(void) {
     hit_ship(&board, 3, 9);
     assert(1 == check_ships(&board));
 
-    free_board(&board);
+    free_prof_board(&board);
 }
 
 static void
@@ -150,5 +150,5 @@ test_is_in_bounds(void) {
     assert(is_in_bounds(BOARD_WIDTH - 1, BOARD_HEIGHT - 1) == OK);
     assert(is_in_bounds(BOARD_WIDTH, BOARD_HEIGHT) == ERROR_TILE_OUT_OF_BOUNDS);
     assert(is_in_bounds(-1, -1) == ERROR_TILE_OUT_OF_BOUNDS);
-    free_board(&board);
+    free_prof_board(&board);
 }

@@ -24,7 +24,7 @@
 #include "ship.h"
 
 extern void init_board(Board* board);
-extern void free_board(Board* board);
+extern void free_prof_board(Board* board);
 extern void print_board(Board* board);
 extern void display_board(Board* board);
 extern void display_board_hidden(Board* board);
