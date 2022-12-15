@@ -64,7 +64,7 @@ init_game_mode(void) {
     fflush(stdin);
 
     /* Print the game mode. */
-    printf("Game mode: %d\n", game.mode);
+    display_game_mode(game.mode);
 }
 
 static int
@@ -129,6 +129,9 @@ init_players(void) {
         free_prof(player2);
     }
 
+    game.state = GAME_STATE_RUNNING;
+    game.winner = IN_PROGRESS;
+
     return OK;
 }
 
@@ -136,28 +139,23 @@ static int
 init_ships(Board* board) {
     int err;
     /* Init the ships. */
-    err = add_ship(board, SHIP_FRIGATE, 0, 0, ORIENTATION_HORIZONTAL);
+    err = add_ship(board, SHIP_FRIGATE, 3, 2, ORIENTATION_HORIZONTAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return ERROR;
     }
 
-    err = add_ship(board, SHIP_DESTROYER, 4, 6, ORIENTATION_VERTICAL);
+    err = add_ship(board, SHIP_DESTROYER, 0, 0, ORIENTATION_VERTICAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return ERROR;
     }
 
-    err = add_ship(board, SHIP_CRUISER, 2, 2, ORIENTATION_HORIZONTAL);
+    err = add_ship(board, SHIP_CRUISER, 2, 0, ORIENTATION_HORIZONTAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return ERROR;
     }
 
-    err = add_ship(board, SHIP_CARRIER, 6, 4, ORIENTATION_VERTICAL);
-    if (OK != err) {
-        printf("Error: Couldn't add the ship\n");
-        return ERROR;
-    }
     return OK;
 }

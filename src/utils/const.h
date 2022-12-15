@@ -70,5 +70,6 @@ typedef enum player_type { PLAYER_TYPE_HUMAN, PLAYER_TYPE_AI } PlayerType;
 
 typedef enum game_turn { GAME_TURN_PLAYER1, GAME_TURN_PLAYER2 } GameTurn;
 
+typedef enum game_winner { IN_PROGRESS, GAME_WINNER_PLAYER1, GAME_WINNER_PLAYER2, GAME_WINNER_DRAW } GameWinner;
 
 #endif

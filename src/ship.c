@@ -162,6 +162,7 @@ hit_ship(Board* board, int x, int y) {
             if (is_ship_destroyed(ship, board)) {
                 remove_ship(board, ship);
             }
+            printf("You hit a ship!\n");
 
             return OK;
         case TILE_STATE_HIT:

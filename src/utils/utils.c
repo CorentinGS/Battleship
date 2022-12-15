@@ -13,11 +13,9 @@
  *                                                                            *
  ******************************************************************************/
 
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+
 #include "utils.h"
-#include "const.h"
+#include "../game.h"
 
 int
 is_in_array(const int* array, int size, int value) {
@@ -32,8 +30,35 @@ is_in_array(const int* array, int size, int value) {
 
 void
 get_random_ai_name(char* name) {
-    const char COMPUTER_NAMES[2][MAX_NAME_SIZE] = {"Totoro", "TOTO"};
+    const char COMPUTER_NAMES[5][MAX_NAME_SIZE] = {"Totoro", "Chihiro", "Haku", "Satsuki", "Kiki"};
 
     srand(time(NULL));
     strcpy(name, COMPUTER_NAMES[rand() % 2]);
+}
+
+void
+display_game_mode(GameMode mode) {
+    switch (mode) {
+        case GAME_MODE_SINGLE:
+            printf("You are playing against the computer.\n");
+            break;
+        case GAME_MODE_MULTI:
+            printf("You are playing against another player.\n");
+            break;
+        default:
+            printf("Unknown game mode.\n");
+            break;
+    }
+}
+
+void display_header(Game *game) {
+    printf("========================================\n");
+    printf("Battleship\n");
+    printf("By: CorentinGS\n");
+    printf("LICENCE: BSD-3\n");
+    printf("Created: 2022/12/15 by CorentinGS\n");
+    printf("========================================\n");
+    printf("Welcome to Battleship!\n");
+    printf("You are playing against %s.\n", game->player2.name);
+    printf("========================================\n");
 }

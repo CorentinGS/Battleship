@@ -58,7 +58,7 @@ SRCS_PATH		= ./src
 
 INCLUDE_PATH	= ./src
 
-SRCS			= player.c board.c tile.c ship.c bomb.c io.c init.c game.c
+SRCS			= player.c board.c tile.c ship.c bomb.c io.c init.c game.c ai.c
 SRCS           += utils/utils.c
 SRCS           += libs/stdprof.c
 SRCS           += test/test_handler.c test/test_board.c test/test_ship.c

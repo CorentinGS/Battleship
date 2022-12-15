@@ -3,7 +3,7 @@
  *                                                                            *
  *                                                                            *
  * Battleship                             ______   _______      _______.      *
- * config.h                              /      | /  _____|    /       |      *
+ * main.c                                /      | /  _____|    /       |      *
  *                                      |  ,----'|  |  __     |   (----`      *
  * By: CorentinGS                       |  |     |  | |_ |     \   \          *
  * <c.giaufersaubert@outlook.com>       |  `----.|  |__| | .----)   |         *
@@ -13,17 +13,12 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_CONFIG_H
-#define BATTLESHIP_CONFIG_H
+#include "ai.h"
 
-#define BOARD_WIDTH        6
-#define BOARD_HEIGHT       6
+/* This function is used to select a random position on the grid. */
+void select_random_position(int* coordinates) {
+    coordinates[0] = rand() % BOARD_WIDTH;
+    coordinates[1] = rand() % BOARD_HEIGHT;
+}
 
-#define FRIGATE_COUNT      1
-#define DESTROYER_COUNT    1
-#define SHIP_CRUISER_COUNT 1
-#define CARRIER_COUNT      0
 
-#define NUMBER_OF_SHIPS    (FRIGATE_COUNT + DESTROYER_COUNT + SHIP_CRUISER_COUNT + CARRIER_COUNT)
-
-#endif

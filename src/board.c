@@ -266,10 +266,14 @@ get_ships(Board* board, int** ships) {
  */
 int
 check_ships(Board* board) {
-    int i, j, id, count;
+    int i, j, id, count, found;
     int* excluded;
 
     excluded = (int*)malloc_prof(sizeof(int) * NUMBER_OF_SHIPS);
+    /* set excluded to -1 */
+    for (i = 0; i < NUMBER_OF_SHIPS; ++i) {
+        excluded[i] = -1;
+    }
 
     count = 0;
     for (i = 0; i < BOARD_WIDTH; ++i) {
@@ -277,7 +281,8 @@ check_ships(Board* board) {
             if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                 /* check if the id is in the excluded list */
                 id = get_ship_at(board, i, j)->id;
-                if (!is_in_array(excluded, NUMBER_OF_SHIPS, id)) {
+                found = is_in_array(excluded, NUMBER_OF_SHIPS, id);
+                if (!found) {
                     excluded[count++] = id;
                 }
             }
