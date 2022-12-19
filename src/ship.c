@@ -24,18 +24,18 @@ static int get_unique_ship_id(void);
 Ship*
 create_ship(void) {
     /* Allocate memory for the ship */
-    Ship* ship = malloc(sizeof(*ship));
+    Ship* ship = malloc_prof(sizeof(*ship));
     if (NULL == ship) {
-        fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
+        fprintf(stderr, "Error: malloc_prof_ship: malloc_prof failed.\n");
         exit(EXIT_FAILURE);
     }
     /* Initialize the ship */
     ship->type = SHIP_NONE;
     ship->orientation = ORIENTATION_HORIZONTAL;
     /* Allocate memory for the ship head */
-    ship->head = malloc(sizeof(*ship->head) * COORDINATE_SIZE);
+    ship->head = malloc_prof(sizeof(*ship->head) * COORDINATE_SIZE);
     if (NULL == ship->head) {
-        fprintf(stderr, "Error: malloc_ship: malloc failed.\n");
+        fprintf(stderr, "Error: malloc_prof_ship: malloc_prof failed.\n");
         exit(EXIT_FAILURE);
     }
     /* Initialize the ship head */
@@ -71,17 +71,17 @@ set_ship(Ship* ship, ShipType type, Orientation orientation, int x, int y) {
 }
 
 /*
- * This function is used to free a ship.
- * @param ship the ship to free.
+ * This function is used to free_prof a ship.
+ * @param ship the ship to free_prof.
  */
 void
-free_ship(Ship* ship) {
+free_prof_ship(Ship* ship) {
     if (NULL != ship) {
-        /* Free the ship head */
+        /* free_prof the ship head */
         if (NULL != ship->head) {
-            free(ship->head);
+            free_prof(ship->head);
         }
-        free(ship);
+        free_prof(ship);
     }
 }
 
@@ -159,10 +159,11 @@ hit_ship(Board* board, int x, int y) {
                 return ERROR;
             }
             tile->state = TILE_STATE_HIT;
+            printf("You hit a ship!\n");
             if (is_ship_destroyed(ship, board)) {
                 remove_ship(board, ship);
+                printf("The ship has been destroyed!\n");
             }
-
             return OK;
         case TILE_STATE_HIT:
             return INFO_TILE_ALREADY_HIT;
@@ -191,7 +192,7 @@ remove_ship(Board* board, Ship* ship) {
         }
     }
 
-    free_ship(ship);
+    free_prof_ship(ship);
     return OK;
 }
 
@@ -211,7 +212,7 @@ get_ship_at(Board* board, int x, int y) {
         return NULL;
     }
     /* Get the head of the ship */
-    if (TILE_STATE_SHIP != board->tiles[x][y].state) {
+    if (TILE_STATE_SHIP != board->tiles[x][y].state && TILE_STATE_HIT != board->tiles[x][y].state) {
         return NULL;
     }
 
@@ -236,11 +237,11 @@ move_ship(Board* board, Ship* ship, int v) {
 
     /* Check if the ship is in bounds */
     if (ORIENTATION_HORIZONTAL == ship->orientation) {
-        if (x - v < 0 || x + size - v > BOARD_WIDTH) {
+        if (x - v < 0 || x + size > BOARD_WIDTH) {
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     } else {
-        if (y - v < 0 || y + size - v > BOARD_HEIGHT) {
+        if (y - v < 0 || y + size > BOARD_HEIGHT) {
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     }
@@ -251,16 +252,15 @@ move_ship(Board* board, Ship* ship, int v) {
             if (TILE_STATE_SHIP == board->tiles[x - v][y].state) {
                 return ERROR_SHIP_OVERLAP;
             }
-        } else if (TILE_STATE_SHIP == board->tiles[x + size - v][y].state) {
+        } else if (TILE_STATE_SHIP == board->tiles[x + size][y].state) {
             return ERROR_SHIP_OVERLAP;
         }
-
     } else {
         if (1 == v) {
             if (TILE_STATE_SHIP == board->tiles[x][y - v].state) {
                 return ERROR_SHIP_OVERLAP;
             }
-        } else if (TILE_STATE_SHIP == board->tiles[x][y + size - v].state) {
+        } else if (TILE_STATE_SHIP == board->tiles[x][y + size].state) {
             return ERROR_SHIP_OVERLAP;
         }
     }
@@ -270,7 +270,10 @@ move_ship(Board* board, Ship* ship, int v) {
         if (-1 == v) {
             /* Move each tile of the ship to the right */
             for (i = size - 1; i >= 0; --i) {
-                state = TILE_STATE_BOMB == board->tiles[x + i + 1][y].state ? TILE_STATE_HIT : TILE_STATE_SHIP;
+                state = (TILE_STATE_BOMB == board->tiles[x + i + 1][y].state
+                         || TILE_STATE_HIT == board->tiles[x + i + 1][y].state)
+                            ? TILE_STATE_HIT
+                            : TILE_STATE_SHIP;
                 board->tiles[x + i + 1][y] = board->tiles[x + i][y];
                 board->tiles[x + i + 1][y].state = state;
                 board->tiles[x + i + 1][y].ship_head[0] = x + 1;
@@ -279,10 +282,14 @@ move_ship(Board* board, Ship* ship, int v) {
                 board->tiles[x + i][y].ship = NULL;
                 board->tiles[x + i][y].ship_head = NULL;
             }
+            board->tiles[x + 1][y].ship = ship;
         } else {
             /* Move each tile of the ship to the left */
             for (i = 0; i < size; ++i) {
-                state = TILE_STATE_BOMB == board->tiles[x + i - 1][y].state ? TILE_STATE_HIT : TILE_STATE_SHIP;
+                state = (TILE_STATE_BOMB == board->tiles[x + i - 1][y].state
+                         || TILE_STATE_HIT == board->tiles[x + i - 1][y].state)
+                            ? TILE_STATE_HIT
+                            : TILE_STATE_SHIP;
                 board->tiles[x + i - 1][y] = board->tiles[x + i][y];
                 board->tiles[x + i - 1][y].state = state;
                 board->tiles[x + i - 1][y].ship_head[0] = x - 1;
@@ -291,13 +298,17 @@ move_ship(Board* board, Ship* ship, int v) {
                 board->tiles[x + i][y].ship = NULL;
                 board->tiles[x + i][y].ship_head = NULL;
             }
+            board->tiles[x - 1][y].ship = ship;
         }
         ship->head[0] -= v;
     } else {
         if (-1 == v) {
             /* Move each tile of the ship to the bottom */
             for (i = size - 1; i >= 0; --i) {
-                state = TILE_STATE_BOMB == board->tiles[x][y + i + 1].state ? TILE_STATE_HIT : TILE_STATE_SHIP;
+                state = (TILE_STATE_BOMB == board->tiles[x][y + i + 1].state
+                         || TILE_STATE_HIT == board->tiles[x][y + i + 1].state)
+                            ? TILE_STATE_HIT
+                            : TILE_STATE_SHIP;
                 board->tiles[x][y + i + 1] = board->tiles[x][y + i];
                 board->tiles[x][y + i + 1].state = state;
                 board->tiles[x][y + i + 1].ship_head[0] = x;
@@ -306,10 +317,15 @@ move_ship(Board* board, Ship* ship, int v) {
                 board->tiles[x][y + i].ship = NULL;
                 board->tiles[x][y + i].ship_head = NULL;
             }
+            board->tiles[x][y + 1].ship = ship;
+
         } else {
             /* Move each tile of the ship to the top */
             for (i = 0; i < size; ++i) {
-                state = TILE_STATE_BOMB == board->tiles[x][y + i - 1].state ? TILE_STATE_HIT : TILE_STATE_SHIP;
+                state = (TILE_STATE_BOMB == board->tiles[x][y + i - 1].state
+                         || TILE_STATE_HIT == board->tiles[x][y + i - 1].state)
+                            ? TILE_STATE_HIT
+                            : TILE_STATE_SHIP;
                 board->tiles[x][y + i - 1] = board->tiles[x][y + i];
                 board->tiles[x][y + i - 1].state = state;
                 board->tiles[x][y + i - 1].ship_head[0] = x;
@@ -318,6 +334,7 @@ move_ship(Board* board, Ship* ship, int v) {
                 board->tiles[x][y + i].ship = NULL;
                 board->tiles[x][y + i].ship_head = NULL;
             }
+            board->tiles[x][y - 1].ship = ship;
         }
         ship->head[1] -= v;
     }

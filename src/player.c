@@ -40,9 +40,9 @@ create_player(void) {
     char* name;
 
     /* Allocate memory for the player. */
-    player = malloc(sizeof(*player));
+    player = malloc_prof(sizeof(*player));
 
-    player->name = malloc(sizeof(player->name) * MAX_NAME_SIZE);
+    player->name = malloc_prof(sizeof(player->name) * MAX_NAME_SIZE);
     player->type = PLAYER_TYPE_HUMAN;
     return player;
 }

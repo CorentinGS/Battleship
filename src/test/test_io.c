@@ -13,14 +13,20 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "test_handler.h"
-#include "test_board.h"
-#include "test_ship.h"
+#include <assert.h>
 #include "test_io.h"
+#include "../io.h"
 
-void
-run_tests(void) {
-    test_board();
-    test_ship();
-    /* test_io(); */
+static void test_ask_action(void);
+
+
+void test_io(void) {
+    test_ask_action();
 }
+
+
+static void test_ask_action(void) {
+        int action = ask_action();
+        assert(GAME_ACTION_FIRE == action || GAME_ACTION_MOVE == action);
+}
+

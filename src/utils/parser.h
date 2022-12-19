@@ -13,14 +13,7 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "test_handler.h"
-#include "test_board.h"
-#include "test_ship.h"
-#include "test_io.h"
+#ifndef BATTLESHIP_PARSER_H
+#define BATTLESHIP_PARSER_H
 
-void
-run_tests(void) {
-    test_board();
-    test_ship();
-    /* test_io(); */
-}
+#endif

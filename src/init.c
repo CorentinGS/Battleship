@@ -64,7 +64,7 @@ init_game_mode(void) {
     fflush(stdin);
 
     /* Print the game mode. */
-    printf("Game mode: %d\n", game.mode);
+    display_game_mode(game.mode);
 }
 
 static int
@@ -76,14 +76,14 @@ init_players(void) {
     player1 = create_player();
     player2 = create_player();
 
-    name = malloc(sizeof(char) * MAX_NAME_SIZE);
+    name = malloc_prof(sizeof(char) * MAX_NAME_SIZE);
 
     /* Init the players. */
     err = get_player_name(name, MAX_NAME_SIZE);
     if (OK != err) {
         printf("Error: Couldn't get the name\n");
         if (NULL != name) {
-            free(name);
+            free_prof(name);
         }
         return ERROR;
     }
@@ -97,7 +97,7 @@ init_players(void) {
         if (OK != err) {
             printf("Error: Couldn't get the name\n");
             if (NULL != name) {
-                free(name);
+                free_prof(name);
             }
             return ERROR;
         }
@@ -114,20 +114,23 @@ init_players(void) {
     game.player1 = *player1;
     game.player2 = *player2;
 
-    /* Free the name. */
+    /* free_prof the name. */
     if (NULL != name) {
-        free(name);
+        free_prof(name);
     }
 
-    /* Free the players. */
+    /* free_prof the players. */
     if (NULL != player1) {
-        free(player1);
+        free_prof(player1);
     }
 
-    /* Free the players. */
+    /* free_prof the players. */
     if (NULL != player2) {
-        free(player2);
+        free_prof(player2);
     }
+
+    game.state = GAME_STATE_RUNNING;
+    game.winner = IN_PROGRESS;
 
     return OK;
 }
@@ -136,28 +139,23 @@ static int
 init_ships(Board* board) {
     int err;
     /* Init the ships. */
-    err = add_ship(board, SHIP_FRIGATE, 0, 0, ORIENTATION_HORIZONTAL);
+    err = add_ship(board, SHIP_FRIGATE, 3, 2, ORIENTATION_HORIZONTAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return ERROR;
     }
 
-    err = add_ship(board, SHIP_DESTROYER, 4, 6, ORIENTATION_VERTICAL);
+    err = add_ship(board, SHIP_DESTROYER, 0, 0, ORIENTATION_VERTICAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return ERROR;
     }
 
-    err = add_ship(board, SHIP_CRUISER, 2, 2, ORIENTATION_HORIZONTAL);
+    err = add_ship(board, SHIP_CRUISER, 2, 0, ORIENTATION_HORIZONTAL);
     if (OK != err) {
         printf("Error: Couldn't add the ship\n");
         return ERROR;
     }
 
-    err = add_ship(board, SHIP_CARRIER, 6, 4, ORIENTATION_VERTICAL);
-    if (OK != err) {
-        printf("Error: Couldn't add the ship\n");
-        return ERROR;
-    }
     return OK;
 }

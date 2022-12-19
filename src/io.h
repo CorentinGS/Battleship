@@ -16,10 +16,10 @@
 #ifndef BATTLESHIP_IO_H
 #define BATTLESHIP_IO_H
 
-#include <malloc.h>
-
 #include "common.h"
 
 extern void ask_coordinates(int* coordinates);
+extern int ask_action(void);
+extern GameDirection ask_move_vector(void);
 
 #endif

@@ -13,14 +13,12 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "test_handler.h"
-#include "test_board.h"
-#include "test_ship.h"
-#include "test_io.h"
+#include "ai.h"
 
-void
-run_tests(void) {
-    test_board();
-    test_ship();
-    /* test_io(); */
+/* This function is used to select a random position on the grid. */
+void select_random_position(int* coordinates) {
+    coordinates[0] = rand() % BOARD_WIDTH;
+    coordinates[1] = rand() % BOARD_HEIGHT;
 }
+
+

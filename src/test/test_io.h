@@ -13,14 +13,10 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "test_handler.h"
-#include "test_board.h"
-#include "test_ship.h"
-#include "test_io.h"
+#ifndef BATTLESHIP_TEST_IO_H
+#define BATTLESHIP_TEST_IO_H
 
-void
-run_tests(void) {
-    test_board();
-    test_ship();
-    /* test_io(); */
-}
+#include "../common.h"
+extern void test_io(void);
+
+#endif

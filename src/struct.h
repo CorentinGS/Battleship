@@ -53,6 +53,7 @@ typedef struct {
     GameMode mode;
     GameState state;
     GameTurn turn;
+    GameWinner winner;
 } Game;
 
 #endif

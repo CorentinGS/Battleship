@@ -13,14 +13,5 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "test_handler.h"
-#include "test_board.h"
-#include "test_ship.h"
-#include "test_io.h"
+#include "parser.h"
 
-void
-run_tests(void) {
-    test_board();
-    test_ship();
-    /* test_io(); */
-}

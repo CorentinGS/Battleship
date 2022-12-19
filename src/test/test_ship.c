@@ -63,7 +63,7 @@ test_create_ship(void) {
     assert(ship->head[1] == 0);
 
     if (ship != NULL) {
-        free_ship(ship);
+        free_prof_ship(ship);
     }
 }
 
@@ -91,7 +91,7 @@ test_set_ship(void) {
     assert(ship->head[1] == 1);
 
     if (ship != NULL) {
-        free_ship(ship);
+        free_prof_ship(ship);
     }
 }
 
@@ -114,7 +114,7 @@ test_is_ship_destroyed(void) {
 
     assert(is_ship_destroyed(ship, &board) == TRUE);
 
-    free_board(&board);
+    free_prof_board(&board);
 }
 
 static void
@@ -142,7 +142,7 @@ test_hit_ship(void) {
     hit_ship(&board, 1, 0);
     assert(check_ships(&board) == 0);
 
-    free_board(&board);
+    free_prof_board(&board);
 }
 
 static void
@@ -152,8 +152,8 @@ test_unique_ship_id(void) {
     ship1 = create_ship();
     ship2 = create_ship();
     assert(ship1->id != ship2->id);
-    free_ship(ship1);
-    free_ship(ship2);
+    free_prof_ship(ship1);
+    free_prof_ship(ship2);
 }
 
 static void
@@ -168,7 +168,7 @@ test_get_ship_at(void) {
     assert(get_ship_at(&board, 2, 2)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 4) == NULL);
-    free_board(&board);
+    free_prof_board(&board);
 }
 
 static void
@@ -203,5 +203,19 @@ test_move_ship(void) {
     assert(get_ship_at(&board, 2, 2)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
 
-    free_board(&board);
+    hit_ship(&board, 2, 3);
+    ship2 = get_ship_at(&board, 2, 3);
+    if (NULL == ship2) {
+        printf("Error: ship2 is NULL");
+    }
+    err = move_ship(&board, ship2, -1);
+    if (OK != err) {
+        printf("Error: %d", err);
+    }
+
+    assert(get_ship_at(&board, 2, 2) == NULL);
+    assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
+    assert(get_ship_at(&board, 2, 4)->type == SHIP_DESTROYER);
+
+    free_prof_board(&board);
 }
