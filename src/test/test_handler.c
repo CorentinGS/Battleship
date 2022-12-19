@@ -22,5 +22,5 @@ void
 run_tests(void) {
     test_board();
     test_ship();
-    test_io();
+    /* test_io(); */
 }
