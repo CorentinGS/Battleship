@@ -268,6 +268,7 @@ int
 check_ships(Board* board) {
     int i, j, id, count, found;
     int* excluded;
+    Ship* ship;
 
     excluded = (int*)malloc_prof(sizeof(int) * NUMBER_OF_SHIPS);
     /* set excluded to -1 */
@@ -280,7 +281,12 @@ check_ships(Board* board) {
         for (j = 0; j < BOARD_HEIGHT; ++j) {
             if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                 /* check if the id is in the excluded list */
-                id = get_ship_at(board, i, j)->id;
+                ship = get_ship_at(board, i, j);
+                if (NULL == ship) {
+                    printf("Error: ship is NULL at %d, %d in check_ships function in board.c file. Exiting.\n", i, j);
+                    exit(1);
+                }
+                id = ship->id;
                 found = is_in_array(excluded, NUMBER_OF_SHIPS, id);
                 if (!found) {
                     excluded[count++] = id;

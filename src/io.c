@@ -56,6 +56,11 @@ ask_move_vector(void) {
 
     /* convert to direction */
     direction = input_vector_to_direction(input);
+    if (GAME_DIRECTION_NONE == direction) {
+        /* if the input is not a valid direction, ask again */
+        printf("Invalid direction, please try again.\n");
+        direction = ask_move_vector();
+    }
 
     free_prof(input);
 
@@ -64,7 +69,8 @@ ask_move_vector(void) {
 
 static void
 get_input_vector(char* input) {
-    printf("Enter the vector of the move (u/d/r/l): ");
+    int ch;
+    printf("Enter the vector of the move (0=forward, 1=backward): ");
     scanf("%s", input);
 
     if (strlen(input) != 1) {
@@ -72,20 +78,29 @@ get_input_vector(char* input) {
         get_input_vector(input);
     }
 
-    if (input[0] != 'u' && input[0] != 'd' && input[0] != 'r' && input[0] != 'l') {
+    if (input[0] != '0' && input[0] != '1') {
         printf("Invalid input, please try again.\n");
         get_input_vector(input);
+    }
+
+    while (((ch = getchar()) != EOF) && (ch != '\n')) {
+        ;
     }
 }
 
 static void
 get_input_action(char* input) {
-    printf("What do you want to do? (1: shoot, 2: move a ship) ");
+    int ch;
+    printf("What do you want to do? (0: shoot, 1: move a ship) ");
     scanf("%s", input);
 
-    if (strcmp(input, "1") != 0 && strcmp(input, "2") != 0) {
+    if (strcmp(input, "0") != 0 && strcmp(input, "1") != 0) {
         printf("Invalid input. Please try again.\n");
         get_input_action(input);
+    }
+
+    while (((ch = getchar()) != EOF) && (ch != '\n')) {
+        ;
     }
 }
 

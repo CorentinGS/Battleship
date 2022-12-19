@@ -30,14 +30,10 @@ is_in_array(const int* array, int size, int value) {
 GameDirection
 input_vector_to_direction(const char* input) {
     switch (input[0]) {
-        case 'd':
-            return GAME_DIRECTION_DOWN;
-        case 'u':
-            return GAME_DIRECTION_UP;
-        case 'l':
-            return GAME_DIRECTION_LEFT;
-        case 'r':
-            return GAME_DIRECTION_RIGHT;
+        case '0':
+            return GAME_DIRECTION_FORWARD;
+        case '1':
+            return GAME_DIRECTION_BACKWARD;
         default:
             return GAME_DIRECTION_NONE;
     }

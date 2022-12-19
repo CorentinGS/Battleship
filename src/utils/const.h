@@ -59,7 +59,8 @@ typedef enum error {
     INFO_BOMB_OVERLAP,
     ERROR_TILE_OUT_OF_BOUNDS,
     INFO_TILE_ALREADY_HIT,
-    ERROR_TILE_NOT_SHIP
+    ERROR_TILE_NOT_SHIP,
+    BREAK_PARENT_LOOP
 } ERROR_CODE;
 
 typedef enum game_state { GAME_STATE_RUNNING, GAME_STATE_END } GameState;
@@ -75,11 +76,9 @@ typedef enum game_winner { IN_PROGRESS, GAME_WINNER_PLAYER1, GAME_WINNER_PLAYER2
 typedef enum game_action { GAME_ACTION_FIRE, GAME_ACTION_MOVE } GameAction;
 
 typedef enum game_direction {
+    GAME_DIRECTION_BACKWARD = -1,
     GAME_DIRECTION_NONE,
-    GAME_DIRECTION_UP,
-    GAME_DIRECTION_DOWN,
-    GAME_DIRECTION_LEFT,
-    GAME_DIRECTION_RIGHT
+    GAME_DIRECTION_FORWARD
 } GameDirection;
 
 #endif

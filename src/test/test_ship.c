@@ -203,5 +203,19 @@ test_move_ship(void) {
     assert(get_ship_at(&board, 2, 2)->type == SHIP_DESTROYER);
     assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
 
+    hit_ship(&board, 2, 3);
+    ship2 = get_ship_at(&board, 2, 3);
+    if (NULL == ship2) {
+        printf("Error: ship2 is NULL");
+    }
+    err = move_ship(&board, ship2, -1);
+    if (OK != err) {
+        printf("Error: %d", err);
+    }
+
+    assert(get_ship_at(&board, 2, 2) == NULL);
+    assert(get_ship_at(&board, 2, 3)->type == SHIP_DESTROYER);
+    assert(get_ship_at(&board, 2, 4)->type == SHIP_DESTROYER);
+
     free_prof_board(&board);
 }
