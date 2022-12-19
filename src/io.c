@@ -17,6 +17,8 @@
 
 static void get_input_coords(char* input);
 static void convert_input_to_coordinates(const char* input, int* coordinates);
+static void get_input_action(char* input);
+static void get_input_vector(char* input);
 
 void
 ask_coordinates(int* coordinates) {
@@ -26,6 +28,65 @@ ask_coordinates(int* coordinates) {
     get_input_coords(input);
     convert_input_to_coordinates(input, coordinates);
     free_prof(input);
+}
+
+int
+ask_action(void) {
+    char* input;
+    int action;
+
+    input = malloc_prof(sizeof(*input) * 3);
+    get_input_action(input);
+    /* safe conversion because we know that the input is a number */
+    action = (int)strtol(input, NULL, 10);
+
+    free_prof(input);
+
+    return action;
+}
+
+GameDirection
+ask_move_vector(void) {
+    char* input;
+    GameDirection direction;
+
+    input = malloc_prof(sizeof(*input) * 3);
+
+    get_input_vector(input);
+
+    /* convert to direction */
+    direction = input_vector_to_direction(input);
+
+    free_prof(input);
+
+    return direction;
+}
+
+static void
+get_input_vector(char* input) {
+    printf("Enter the vector of the move (u/d/r/l): ");
+    scanf("%s", input);
+
+    if (strlen(input) != 1) {
+        printf("Invalid input, please try again.\n");
+        get_input_vector(input);
+    }
+
+    if (input[0] != 'u' && input[0] != 'd' && input[0] != 'r' && input[0] != 'l') {
+        printf("Invalid input, please try again.\n");
+        get_input_vector(input);
+    }
+}
+
+static void
+get_input_action(char* input) {
+    printf("What do you want to do? (1: shoot, 2: move a ship) ");
+    scanf("%s", input);
+
+    if (strcmp(input, "1") != 0 && strcmp(input, "2") != 0) {
+        printf("Invalid input. Please try again.\n");
+        get_input_action(input);
+    }
 }
 
 static void

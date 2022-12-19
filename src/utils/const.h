@@ -72,4 +72,14 @@ typedef enum game_turn { GAME_TURN_PLAYER1, GAME_TURN_PLAYER2 } GameTurn;
 
 typedef enum game_winner { IN_PROGRESS, GAME_WINNER_PLAYER1, GAME_WINNER_PLAYER2, GAME_WINNER_DRAW } GameWinner;
 
+typedef enum game_action { GAME_ACTION_FIRE, GAME_ACTION_MOVE } GameAction;
+
+typedef enum game_direction {
+    GAME_DIRECTION_NONE,
+    GAME_DIRECTION_UP,
+    GAME_DIRECTION_DOWN,
+    GAME_DIRECTION_LEFT,
+    GAME_DIRECTION_RIGHT
+} GameDirection;
+
 #endif

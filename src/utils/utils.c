@@ -13,7 +13,6 @@
  *                                                                            *
  ******************************************************************************/
 
-
 #include "utils.h"
 #include "../game.h"
 
@@ -26,6 +25,22 @@ is_in_array(const int* array, int size, int value) {
         }
     }
     return FALSE;
+}
+
+GameDirection
+input_vector_to_direction(const char* input) {
+    switch (input[0]) {
+        case 'd':
+            return GAME_DIRECTION_DOWN;
+        case 'u':
+            return GAME_DIRECTION_UP;
+        case 'l':
+            return GAME_DIRECTION_LEFT;
+        case 'r':
+            return GAME_DIRECTION_RIGHT;
+        default:
+            return GAME_DIRECTION_NONE;
+    }
 }
 
 void
@@ -51,7 +66,8 @@ display_game_mode(GameMode mode) {
     }
 }
 
-void display_header(Game *game) {
+void
+display_header(Game* game) {
     printf("========================================\n");
     printf("Battleship\n");
     printf("By: CorentinGS\n");

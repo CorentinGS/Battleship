@@ -13,20 +13,20 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_UTILS_H
-#define BATTLESHIP_UTILS_H
+#include <assert.h>
+#include "test_io.h"
+#include "../io.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <stdio.h>
-#include "const.h"
-#include "../struct.h"
+static void test_ask_action(void);
 
-extern int is_in_array(const int* array, int size, int value);
-extern void get_random_ai_name(char* name);
-extern void display_game_mode(GameMode mode);
-extern void display_header(Game* game);
-extern GameDirection input_vector_to_direction(const char* input);
 
-#endif
+void test_io(void) {
+    test_ask_action();
+}
+
+
+static void test_ask_action(void) {
+        int action = ask_action();
+        assert(GAME_ACTION_FIRE == action || GAME_ACTION_MOVE == action);
+}
+

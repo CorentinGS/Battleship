@@ -13,20 +13,10 @@
  *                                                                            *
  ******************************************************************************/
 
-#ifndef BATTLESHIP_UTILS_H
-#define BATTLESHIP_UTILS_H
+#ifndef BATTLESHIP_TEST_IO_H
+#define BATTLESHIP_TEST_IO_H
 
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <stdio.h>
-#include "const.h"
-#include "../struct.h"
-
-extern int is_in_array(const int* array, int size, int value);
-extern void get_random_ai_name(char* name);
-extern void display_game_mode(GameMode mode);
-extern void display_header(Game* game);
-extern GameDirection input_vector_to_direction(const char* input);
+#include "../common.h"
+extern void test_io(void);
 
 #endif
