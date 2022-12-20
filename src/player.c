@@ -23,7 +23,6 @@
 int
 get_player_name(char* name, const int size) {
     char* error;
-    char ch;
     printf("Please enter your name: ");
     /* We use fgets instead of scanf because it is safer. */
     error = fgets(name, size, stdin);
@@ -37,7 +36,6 @@ get_player_name(char* name, const int size) {
 Player*
 create_player(void) {
     Player* player;
-    char* name;
 
     /* Allocate memory for the player. */
     player = malloc_prof(sizeof(*player));

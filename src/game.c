@@ -80,7 +80,17 @@ game_action_fire(Board* board) {
 
     err = place_bomb(board, coords[0], coords[1]);
     if (err != OK) {
-        printf("You already bombed this place!\n");
+        switch (err) {
+            case ERROR_TILE_OUT_OF_BOUNDS:
+                printf("Coordinates out of bounds!\n");
+                break;
+            case INFO_BOMB_OVERLAP:
+                printf("You already bombed this place!\n");
+                break;
+            default:
+                printf("Unknown error!\n");
+                break;
+        }
     }
 
     free_prof(coords);
@@ -102,9 +112,6 @@ game_action_move(Board* board) {
     ship = get_ship_at(board, coords[0], coords[1]);
 
     vector = ask_move_vector();
-
-    /* print ship head */
-    printf("Ship head: %d, %d", ship->head[0], ship->head[1]);
 
     err = move_ship(board, ship, vector);
     if (err != OK) {

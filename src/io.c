@@ -20,6 +20,8 @@ static void convert_input_to_coordinates(const char* input, int* coordinates);
 static void get_input_action(char* input);
 static void get_input_vector(char* input);
 
+#define MAX_INPUT_SIZE ((BOARD_HEIGHT >= 9) ? (3) : (2))
+
 void
 ask_coordinates(int* coordinates) {
     char* input;
@@ -69,7 +71,6 @@ ask_move_vector(void) {
 
 static void
 get_input_vector(char* input) {
-    int ch;
     printf("Enter the vector of the move (0=forward, 1=backward): ");
     scanf("%s", input);
 
@@ -83,14 +84,11 @@ get_input_vector(char* input) {
         get_input_vector(input);
     }
 
-    while (((ch = getchar()) != EOF) && (ch != '\n')) {
-        ;
-    }
+    CLEAR_BUFFER();
 }
 
 static void
 get_input_action(char* input) {
-    int ch;
     printf("What do you want to do? (0: shoot, 1: move a ship) ");
     scanf("%s", input);
 
@@ -99,28 +97,31 @@ get_input_action(char* input) {
         get_input_action(input);
     }
 
-    while (((ch = getchar()) != EOF) && (ch != '\n')) {
-        ;
-    }
+    /* clear the buffer */
+    CLEAR_BUFFER();
 }
 
 static void
 get_input_coords(char* input) {
-    int ch;
+    int n;
     printf("Enter coordinates: ");
 
-    fgets(input, 3, stdin);
+    fgets(input, MAX_INPUT_SIZE + 1, stdin);
     /* clear the buffer */
+    CLEAR_BUFFER();
 
-    while (((ch = getchar()) != EOF) && (ch != '\n')) {
-        ;
+    if (input[0] < 'A' || input[0] > 'A' + BOARD_WIDTH - 1 || input[1] < '1' || input[1] > '1' + BOARD_HEIGHT - 1) {
+        printf("Invalid input. Please enter a valid input.\n");
+        get_input_coords(input);
     }
 
     /* input is of the form "A1" */
     /* check if input is valid */
     /* if not, ask again */
     /* Max letter is 'A' + WIDTH - 1 */
-    if (input[0] < 'A' || input[0] > 'A' + BOARD_WIDTH - 1 || input[1] < '1' || input[1] > '1' + '9') {
+    /* Max number is '1' + HEIGHT - 1 */
+    /* number is the second & third character */
+    if (input[0] < 'A' || input[0] > 'A' + BOARD_WIDTH - 1 || input[1] < '1' || input[1] > '9') {
         printf("Invalid input. Please enter a valid input.\n");
         get_input_coords(input);
     }
@@ -129,5 +130,11 @@ get_input_coords(char* input) {
 static void
 convert_input_to_coordinates(const char* input, int* coordinates) {
     coordinates[0] = input[0] - 'A';
+    /* if input[2] is a number, then copy it to input[1] */
     coordinates[1] = input[1] - '1';
+
+    /* if input[2] is a number, then add it to coordinates[1] */
+    if (input[2] >= '0' && input[2] <= '9') {
+        coordinates[1] = (coordinates[1] + 1) * 10 + (input[2] - '1');
+    }
 }

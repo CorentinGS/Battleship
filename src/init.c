@@ -41,27 +41,19 @@ init_boards(void) {
 
 static void
 init_game_mode(void) {
-    int ch;
     int game_mode;
 
     /* Get the game mode. */
     printf("Please enter the game mode (1 for PvP, 2 for PvE): ");
-    /* Check for scanf errors. */
 
+    /* Check for scanf errors. */
     do {
         scanf("%d", &game_mode);
-        /* Clear the input buffer. */
-        while ((ch = getchar()) != '\n' && ch != EOF) {
-            ;
-        }
-
+        CLEAR_BUFFER();
     } while (game_mode != 1 && game_mode != 2);
 
     /* Set the game mode. */
     game.mode = 1 == game_mode ? GAME_MODE_MULTI : GAME_MODE_SINGLE;
-
-    /* Clear the stdin buffer. */
-    fflush(stdin);
 
     /* Print the game mode. */
     display_game_mode(game.mode);

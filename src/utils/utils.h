@@ -23,6 +23,9 @@
 #include "const.h"
 #include "../struct.h"
 
+#define CLEAR_BUFFER() do { int ch; while ( (ch = getchar()) != EOF && ch != '\n' ) {} } while (0)
+
+
 extern int is_in_array(const int* array, int size, int value);
 extern void get_random_ai_name(char* name);
 extern void display_game_mode(GameMode mode);

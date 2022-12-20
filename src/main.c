@@ -51,24 +51,6 @@ main(int argc, char* argv[]) {
 
     game_loop(&game);
 
-    /*    */ /* Print the board. */ /*
-    display_board_hidden(&game.board2);
-
-    */
-    /* Display the board. */        /*
-    display_board(&game.board1);
-
-    coords = malloc_prof(sizeof(int) * 2);
-    ask_coordinates(coords);
-
-    place_bomb(&game.board1, coords[0], coords[1]);
-    if (NULL != coords) {
-        free_prof(coords);
-    }
-
-    display_board(&game.board1);
-
-    */
     /* free_prof on exit.   */
     atexit(onClosing);
 
