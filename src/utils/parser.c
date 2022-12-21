@@ -48,6 +48,15 @@ read_file_line_by_line(FILE* file, char* buffer, void (*process_line)(char*)) {
 }
 
 /*
+ * This function is used to process a line.
+ */
+void
+process_line(char* line) {
+    /* TODO */
+    ;
+}
+
+/*
  * This function is used to process a file.
  */
 int
@@ -65,10 +74,7 @@ process_file(const char* filename) {
     file = open_file(filename);
 
 
-    status = read_file_line_by_line(file, buffer, NULL);
-    if (OK != status) {
-        return status;
-    }
+    read_file_line_by_line(file, buffer, process_line);
 
     status = close_file(file);
     if (OK != status) {
