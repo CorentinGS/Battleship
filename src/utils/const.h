@@ -26,6 +26,8 @@
 
 #define COORDINATE_SIZE    2
 
+#define FILE_BUFFER_SIZE   256
+
 #define ANSI_COLOR_RED     "\033[0;31m"
 #define ANSI_COLOR_GREEN   "\033[0;32m"
 #define ANSI_COLOR_YELLOW  "\033[0;33m"
@@ -37,6 +39,9 @@
 
 /* Tile states enum */
 typedef enum { TILE_STATE_EMPTY, TILE_STATE_SHIP, TILE_STATE_HIT, TILE_STATE_BOMB } TileState;
+
+/* Scenario elements enum */
+typedef enum { SCENARIO_ELEMENT_PLACE_SHIP, SCENARIO_ELEMENT_SHOOT, SCENARIO_ELEMENT_MOVE, SCENARIO_ELEMENT_DISPLAY } ScenarioElementType;
 
 /* Ship size enum */
 typedef enum ship_size {
@@ -59,7 +64,11 @@ typedef enum error {
     INFO_BOMB_OVERLAP,
     ERROR_TILE_OUT_OF_BOUNDS,
     INFO_TILE_ALREADY_HIT,
-    ERROR_TILE_NOT_SHIP
+    ERROR_TILE_NOT_SHIP,
+    ERROR_CANNOT_OPEN_FILE,
+    ERROR_CANNOT_READ_FILE,
+    ERROR_CANNOT_CLOSE_FILE,
+    ERROR_CANNOT_ALLOCATE_MEMORY
 } ERROR_CODE;
 
 typedef enum game_state { GAME_STATE_RUNNING, GAME_STATE_END } GameState;
@@ -74,10 +83,6 @@ typedef enum game_winner { IN_PROGRESS, GAME_WINNER_PLAYER1, GAME_WINNER_PLAYER2
 
 typedef enum game_action { GAME_ACTION_FIRE, GAME_ACTION_MOVE } GameAction;
 
-typedef enum game_direction {
-    GAME_DIRECTION_BACKWARD = -1,
-    GAME_DIRECTION_NONE,
-    GAME_DIRECTION_FORWARD
-} GameDirection;
+typedef enum game_direction { GAME_DIRECTION_BACKWARD = -1, GAME_DIRECTION_NONE, GAME_DIRECTION_FORWARD } GameDirection;
 
 #endif

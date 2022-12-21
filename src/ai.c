@@ -22,3 +22,5 @@ void select_random_position(int* coordinates) {
 }
 
 
+
+

@@ -20,7 +20,7 @@
 
 /* Player structure */
 typedef struct {
-    char *name;
+    char* name;
     PlayerType type;
 } Player;
 
@@ -55,5 +55,16 @@ typedef struct {
     GameTurn turn;
     GameWinner winner;
 } Game;
+
+/* Scenario element */
+typedef struct {
+    ScenarioElementType type;
+    int x;
+    int y;
+    ShipType ship_type;
+    Orientation orientation;
+    Board *board;
+    GameDirection direction;
+} ScenarioElement;
 
 #endif

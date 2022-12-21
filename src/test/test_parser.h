@@ -13,16 +13,11 @@
  *                                                                            *
  ******************************************************************************/
 
-#include "test_handler.h"
-#include "test_board.h"
-#include "test_ship.h"
-#include "test_parser.h"
-#include "../libs/linked_list.h"
+#ifndef BATTLESHIP_TEST_PARSER_H
+#define BATTLESHIP_TEST_PARSER_H
 
-void
-run_tests(void) {
-    test_board();
-    test_ship();
-    test_parser();
-    run_linkedlist_tests();
-}
+#include "../common.h"
+
+extern void test_parser(void);
+
+#endif
