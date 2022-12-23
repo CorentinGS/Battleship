@@ -1,0 +1,14 @@
+version = 1
+
+test_patterns = [
+  "test/**",
+  "test_*.c"
+]
+
+[[analyzers]]
+name = "shell"
+enabled = true
+
+[[analyzers]]
+name = "cxx"
+enabled = true
