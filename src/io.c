@@ -20,13 +20,12 @@ static void convert_input_to_coordinates(const char* input, int* coordinates);
 static void get_input_action(char* input);
 static void get_input_vector(char* input);
 
-#define MAX_INPUT_SIZE ((BOARD_HEIGHT >= 9) ? (3) : (2))
 
 void
 ask_coordinates(int* coordinates) {
     char* input;
 
-    input = malloc_prof(sizeof(*input) * 3);
+    input = malloc_prof(sizeof(*input) * MAX_INPUT_SIZE);
     get_input_coords(input);
     convert_input_to_coordinates(input, coordinates);
     free_prof(input);
@@ -90,6 +89,7 @@ get_input_vector(char* input) {
 static void
 get_input_action(char* input) {
     printf("What do you want to do? (0: shoot, 1: move a ship) ");
+    /* TODO: use fgets instead of scanf */
     scanf("%s", input);
 
     if (strcmp(input, "0") != 0 && strcmp(input, "1") != 0) {
@@ -103,10 +103,9 @@ get_input_action(char* input) {
 
 static void
 get_input_coords(char* input) {
-    int n;
     printf("Enter coordinates: ");
 
-    fgets(input, MAX_INPUT_SIZE + 1, stdin);
+    fgets(input, MAX_INPUT_SIZE, stdin);
     /* clear the buffer */
     CLEAR_BUFFER();
 

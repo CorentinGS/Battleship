@@ -63,8 +63,8 @@ set_board_size(char* size) {
     token = strtok(NULL, "x");
     height = (int)strtol(token, NULL, 10);
     /* Set the board size. */
-    SET_BOARD_WIDTH(width);
-    SET_BOARD_HEIGHT(height);
+    printf("Board size: %dx%d", width, height);
+
 }
 
 /*
@@ -92,9 +92,9 @@ close_file(FILE* file) {
  * This function is used to read a file line by line.
  */
 int
-read_file_line_by_line(FILE* file, char* buffer, void (*process_line)(char*)) {
+read_file_line_by_line(FILE* file, char* buffer, void (*processor)(char*)) {
     while (NULL != fgets(buffer, FILE_BUFFER_SIZE, file)) {
-        process_line(buffer);
+        processor(buffer);
     }
     return OK;
 }

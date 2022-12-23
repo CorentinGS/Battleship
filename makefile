@@ -22,6 +22,7 @@
 
 # Name of the executable
 NAME	= Battleship
+LOWER	= battleship
 
 # Name of the compiler
 CC 		= gcc
@@ -259,4 +260,20 @@ fclean:		header clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re header
+podman:		header
+			@podman build -t $(LOWER) .
+			@printf "%-53b%b" "$(COM_COLOR)podman:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+
+podman-run:	podman
+			@printf "%-53b%b" "$(COM_COLOR)podman-run:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@podman run -it $(LOWER)
+
+docker:		header
+			@docker build -t $(LOWER) .
+			@printf "%-53b%b" "$(COM_COLOR)docker:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+
+docker-run:	docker
+			@printf "%-53b%b" "$(COM_COLOR)docker-run:" "$(OK_COLOR)[✓]$(NO_COLOR)\n"
+			@docker run -it $(LOWER)
+
+.PHONY:		all header clean fclean re podman podman-run docker docker-run
