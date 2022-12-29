@@ -16,6 +16,8 @@
 #include "utils.h"
 #include "../game.h"
 
+extern Game game;
+
 int
 is_in_array(const int* array, int size, int value) {
     int i;
@@ -63,7 +65,7 @@ display_game_mode(GameMode mode) {
 }
 
 void
-display_header(Game* game) {
+display_header(void) {
     printf("========================================\n");
     printf("Battleship\n");
     printf("By: CorentinGS\n");
@@ -71,6 +73,24 @@ display_header(Game* game) {
     printf("Created: 2022/12/15 by CorentinGS\n");
     printf("========================================\n");
     printf("Welcome to Battleship!\n");
-    printf("You are playing against %s.\n", game->player2.name);
+    printf("You are playing against %s.\n", game.player2.name);
     printf("========================================\n");
+}
+
+int
+get_board_width(void) {
+    return game.width;
+}
+
+int
+get_board_height(void) {
+    return game.height;
+}
+
+void set_board_width(int width) {
+    game.width = width;
+}
+
+void set_board_height(int height) {
+    game.height = height;
 }

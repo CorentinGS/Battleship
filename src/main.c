@@ -15,12 +15,14 @@
 
 #include "main.h"
 #include "game.h"
+#include "utils/parser.h"
 
 static void onClosing(void);
 static int get_debug_mode(void);
 static void run_debug_mode(void);
 static void free_prof_game(void);
 static void free_prof_player(Player* player);
+static int no_op(void);
 
 /* Macro to determine if the program is running in debug mode. */
 #define IS_DEBUG_MODE (TRUE == get_debug_mode())
@@ -32,6 +34,7 @@ int
 main(int argc, char* argv[]) {
     int err;
     int* coords;
+    char* filename;
 
     /* If the program is running in debug mode, run the tests. */
     if (IS_DEBUG_MODE) {
@@ -43,6 +46,32 @@ main(int argc, char* argv[]) {
     /* Memset the game structure. */
     memset(&game, 0, sizeof(game));
 
+    /* free_prof on exit.   */
+    atexit(onClosing);
+
+    /* Check if the program has been called with a filename. */
+    if (argc < 2) {
+        err = no_op();
+        if (OK != err) {
+            printf("Error: %d\n", err);
+        }
+    }
+
+    /* Get the filename. */
+    filename = argv[1];
+    /* Process the file. */
+    err = process_file(filename);
+    if (OK != err) {
+        printf("Error: %d\n", err);
+    }
+
+    /* Exit the program with no error. */
+    return OK;
+}
+
+static int
+no_op(void) {
+    int err;
     /* Init the game. */
     err = init_game();
     if (OK != err) {
@@ -51,10 +80,6 @@ main(int argc, char* argv[]) {
 
     game_loop(&game);
 
-    /* free_prof on exit.   */
-    atexit(onClosing);
-
-    /* Exit the program with no error. */
     return OK;
 }
 
@@ -63,6 +88,8 @@ main(int argc, char* argv[]) {
  */
 static void
 run_debug_mode(void) {
+    game.width = BOARD_WIDTH;
+    game.height = BOARD_HEIGHT;
     printf("--------------------------------\n");
     printf(ANSI_COLOR_BLUE "Running tests ⤵️\n" ANSI_COLOR_RESET);
     /* Run the tests. */

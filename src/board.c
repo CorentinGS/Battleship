@@ -23,16 +23,16 @@ init_board(Board* board) {
     int i, j;
 
     /* malloc_prof the board */
-    board->tiles = malloc_prof(sizeof(Tile) * BOARD_WIDTH);
+    board->tiles = malloc_prof(sizeof(Tile) * get_board_width());
 
     /* malloc_prof the tiles */
-    for (i = 0; i < BOARD_WIDTH; ++i) {
-        board->tiles[i] = malloc_prof(sizeof(Tile) * BOARD_HEIGHT);
+    for (i = 0; i < get_board_width(); ++i) {
+        board->tiles[i] = malloc_prof(sizeof(Tile) * get_board_height());
     }
 
     /* init the tiles */
-    for (i = 0; i < BOARD_WIDTH; ++i) {
-        for (j = 0; j < BOARD_HEIGHT; ++j) {
+    for (i = 0; i < get_board_width(); ++i) {
+        for (j = 0; j < get_board_height(); ++j) {
             init_tile(&board->tiles[i][j]);
         }
     }
@@ -52,7 +52,7 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     Ship* ship;
 
     /* check if the ship is out of bounds */
-    if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+    if (x < 0 || x >= get_board_width() || y < 0 || y >= get_board_height()) {
         fprintf(stderr, ANSI_COLOR_WHITE "The ship is out of bounds.\n" ANSI_COLOR_RESET);
         return ERROR_SHIP_OUT_OF_BOUNDS;
     }
@@ -60,13 +60,13 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
     /* check if the ship is out of bounds */
     if (ORIENTATION_HORIZONTAL == orientation) {
         x2 += get_ship_size(type) - 1;
-        if (x2 < 0 || x2 >= BOARD_WIDTH) {
+        if (x2 < 0 || x2 >= get_board_width()) {
             fprintf(stderr, ANSI_COLOR_WHITE "The ship is out of bounds.\n" ANSI_COLOR_RESET);
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     } else {
         y2 += get_ship_size(type) - 1;
-        if (y2 < 0 || y2 >= BOARD_HEIGHT) {
+        if (y2 < 0 || y2 >= get_board_height()) {
             fprintf(stderr, ANSI_COLOR_WHITE "The ship is out of bounds.\n" ANSI_COLOR_RESET);
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
@@ -124,8 +124,8 @@ add_ship(Board* board, ShipType type, int x, int y, Orientation orientation) {
 void
 free_prof_board(Board* board) {
     int i, j;
-    for (i = 0; i < BOARD_WIDTH; ++i) {
-        for (j = 0; j < BOARD_HEIGHT; ++j) {
+    for (i = 0; i < get_board_width(); ++i) {
+        for (j = 0; j < get_board_height(); ++j) {
             free_prof_tile(board, i, j);
         }
         if (NULL != board->tiles[i]) {
@@ -145,8 +145,8 @@ free_prof_board(Board* board) {
 void
 print_board(Board* board) {
     int y, x;
-    for (y = 0; y < BOARD_HEIGHT; ++y) {
-        for (x = 0; x < BOARD_WIDTH; ++x) {
+    for (y = 0; y < get_board_height(); ++y) {
+        for (x = 0; x < get_board_width(); ++x) {
             print_tile(&board->tiles[x][y]);
         }
         printf("\n");
@@ -155,7 +155,7 @@ print_board(Board* board) {
 
 int
 is_in_bounds(int x, int y) {
-    if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+    if (x < 0 || x >= get_board_width() || y < 0 || y >= get_board_height()) {
         return ERROR_TILE_OUT_OF_BOUNDS;
     }
     return OK;
@@ -170,21 +170,21 @@ void
 display_board(Board* board) {
     int y, x;
     printf("    ");
-    for (x = 0; x < BOARD_WIDTH; ++x) {
+    for (x = 0; x < get_board_width(); ++x) {
         printf("%c ", 'A' + x);
     }
     /* Add spacer */
     printf("\n");
     printf("  ");
-    for (x = 0; x < BOARD_WIDTH; ++x) {
+    for (x = 0; x < get_board_width(); ++x) {
         printf("--");
     }
     printf("\n");
 
-    for (y = 0; y < BOARD_HEIGHT; ++y) {
+    for (y = 0; y < get_board_height(); ++y) {
         /* Display the y coordinate using 2 digits */
         printf("%02d| ", y + 1);
-        for (x = 0; x < BOARD_WIDTH; ++x) {
+        for (x = 0; x < get_board_width(); ++x) {
             print_tile(&board->tiles[x][y]);
         }
         printf("\n");
@@ -200,21 +200,21 @@ void
 display_board_hidden(Board* board) {
     int y, x;
     printf("    ");
-    for (x = 0; x < BOARD_WIDTH; ++x) {
+    for (x = 0; x < get_board_width(); ++x) {
         printf("%c ", 'A' + x);
     }
     /* Add spacer */
     printf("\n");
     printf("  ");
-    for (x = 0; x < BOARD_WIDTH; ++x) {
+    for (x = 0; x < get_board_width(); ++x) {
         printf("--");
     }
     printf("\n");
 
-    for (y = 0; y < BOARD_HEIGHT; ++y) {
+    for (y = 0; y < get_board_height(); ++y) {
         /* Display the y coordinate using 2 digits */
         printf("%02d| ", y + 1);
-        for (x = 0; x < BOARD_WIDTH; ++x) {
+        for (x = 0; x < get_board_width(); ++x) {
             print_tile_hidden(&board->tiles[x][y]);
         }
         printf("\n");
@@ -237,8 +237,8 @@ get_ships(Board* board, int** ships) {
 
     excluded = (int*)malloc_prof(sizeof(int) * NUMBER_OF_SHIPS);
 
-    for (i = 0; i < BOARD_WIDTH; ++i) {
-        for (j = 0; j < BOARD_HEIGHT; ++j) {
+    for (i = 0; i < get_board_width(); ++i) {
+        for (j = 0; j < get_board_height(); ++j) {
             if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                 if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                     /* check if the id is in the excluded list */
@@ -277,8 +277,8 @@ check_ships(Board* board) {
     }
 
     count = 0;
-    for (i = 0; i < BOARD_WIDTH; ++i) {
-        for (j = 0; j < BOARD_HEIGHT; ++j) {
+    for (i = 0; i < get_board_width(); ++i) {
+        for (j = 0; j < get_board_height(); ++j) {
             if (TILE_STATE_SHIP == board->tiles[i][j].state) {
                 /* check if the id is in the excluded list */
                 ship = get_ship_at(board, i, j);

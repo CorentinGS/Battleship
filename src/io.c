@@ -20,7 +20,6 @@ static void convert_input_to_coordinates(const char* input, int* coordinates);
 static void get_input_action(char* input);
 static void get_input_vector(char* input);
 
-
 void
 ask_coordinates(int* coordinates) {
     char* input;
@@ -109,7 +108,8 @@ get_input_coords(char* input) {
     /* clear the buffer */
     CLEAR_BUFFER();
 
-    if (input[0] < 'A' || input[0] > 'A' + BOARD_WIDTH - 1 || input[1] < '1' || input[1] > '1' + BOARD_HEIGHT - 1) {
+    if (input[0] < 'A' || input[0] > 'A' + get_board_width() - 1 || input[1] < '1'
+        || input[1] > '1' + get_board_height() - 1) {
         printf("Invalid input. Please enter a valid input.\n");
         get_input_coords(input);
     }
@@ -120,7 +120,7 @@ get_input_coords(char* input) {
     /* Max letter is 'A' + WIDTH - 1 */
     /* Max number is '1' + HEIGHT - 1 */
     /* number is the second & third character */
-    if (input[0] < 'A' || input[0] > 'A' + BOARD_WIDTH - 1 || input[1] < '1' || input[1] > '9') {
+    if (input[0] < 'A' || input[0] > 'A' + get_board_width() - 1 || input[1] < '1' || input[1] > '9') {
         printf("Invalid input. Please enter a valid input.\n");
         get_input_coords(input);
     }

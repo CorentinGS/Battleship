@@ -28,7 +28,7 @@ int
 game_loop(Game* game) {
     int *coords, err, action;
     coords = malloc_prof(sizeof(int) * 2);
-    display_header(game);
+    display_header();
     forever {
         if (game->turn == GAME_TURN_PLAYER1) {
             action = ask_action();

@@ -16,11 +16,8 @@
 #include "ai.h"
 
 /* This function is used to select a random position on the grid. */
-void select_random_position(int* coordinates) {
-    coordinates[0] = rand() % BOARD_WIDTH;
-    coordinates[1] = rand() % BOARD_HEIGHT;
+void
+select_random_position(int* coordinates) {
+    coordinates[0] = rand() % get_board_width();
+    coordinates[1] = rand() % get_board_height();
 }
-
-
-
-

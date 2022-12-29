@@ -73,6 +73,8 @@ test_read_file_line_by_line(void) {
     fclose(file);
 }
 
-static void garbage_line(char* line) {
-    ;
+static void
+garbage_line(char* line) {
+    /* check if line is valid or freed */
+    assert(line != NULL);
 }

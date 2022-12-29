@@ -54,17 +54,8 @@ typedef struct {
     GameState state;
     GameTurn turn;
     GameWinner winner;
+    int width;
+    int height;
 } Game;
-
-/* Scenario element */
-typedef struct {
-    ScenarioElementType type;
-    int x;
-    int y;
-    ShipType ship_type;
-    Orientation orientation;
-    Board *board;
-    GameDirection direction;
-} ScenarioElement;
 
 #endif

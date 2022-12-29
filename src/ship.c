@@ -120,12 +120,12 @@ is_ship_destroyed(Ship* ship, Board* board) {
     x = ship->head[0];
     y = ship->head[1];
     for (i = 0; i < size; i++) {
-        if (ship->orientation == ORIENTATION_HORIZONTAL) {
-            if (board->tiles[x + i][y].state == TILE_STATE_SHIP) {
+        if (ORIENTATION_HORIZONTAL == ship->orientation) {
+            if (TILE_STATE_SHIP == board->tiles[x + i][y].state) {
                 return FALSE;
             }
         } else {
-            if (board->tiles[x][y + i].state == TILE_STATE_SHIP) {
+            if (TILE_STATE_SHIP == board->tiles[x][y + i].state) {
                 return FALSE;
             }
         }
@@ -237,11 +237,11 @@ move_ship(Board* board, Ship* ship, int v) {
 
     /* Check if the ship is in bounds */
     if (ORIENTATION_HORIZONTAL == ship->orientation) {
-        if (x - v < 0 || x + size > BOARD_WIDTH) {
+        if (x - v < 0 || x + size > get_board_width()) {
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     } else {
-        if (y - v < 0 || y + size > BOARD_HEIGHT) {
+        if (y - v < 0 || y + size > get_board_height()) {
             return ERROR_SHIP_OUT_OF_BOUNDS;
         }
     }

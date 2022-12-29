@@ -32,6 +32,8 @@ init_game(void) {
 
 static void
 init_boards(void) {
+    game.width = BOARD_WIDTH;
+    game.height = BOARD_HEIGHT;
     /* Init the board. */
     init_board(&game.board1);
 
