@@ -58,6 +58,6 @@ If you want to contribute to this project, please follow the next steps:
 ## Authors
 
 * **Corentin GS** - *Initial work* - [CorentinGS](https://corentings.vercel.app)
-* **Yann** - *Initial work* - [Yann](https://www.instagram.com/yann__l2/
+* **Yann** - *Initial work* - [Yann](https://www.instagram.com/yann__l2/)
 
 
