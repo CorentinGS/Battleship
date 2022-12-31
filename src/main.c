@@ -49,20 +49,26 @@ main(int argc, char* argv[]) {
     /* free_prof on exit.   */
     atexit(onClosing);
 
-    /* Check if the program has been called with a filename. */
     if (argc < 2) {
+        printf("Usage: %s [-h] [-i] [-f] <scenario_file>\n", argv[0]);
+        return ERROR;
+    }
+
+    if (strcmp(argv[1], "-h") == 0) {
+        printf("Usage: %s [-h] [-i] [-f] <scenario_file>\n", argv[0]);
+    } else if (strcmp(argv[1], "-i") == 0) {
         err = no_op();
         if (OK != err) {
             printf("Error: %d\n", err);
         }
-    }
-
-    /* Get the filename. */
-    filename = argv[1];
-    /* Process the file. */
-    err = process_file(filename);
-    if (OK != err) {
-        printf("Error: %d\n", err);
+    } else if (strcmp(argv[1], "-f") == 0) {
+        filename = argv[2];
+        err = process_file(filename);
+        if (OK != err) {
+            printf("Error: %d\n", err);
+        }
+    } else {
+        printf("Usage: %s [-h] [-i] [-f] <scenario_file>\n", argv[0]);
     }
 
     /* Exit the program with no error. */
