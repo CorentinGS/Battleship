@@ -25,6 +25,14 @@ This is a simple implementation of the classic game Battleship. It is written in
 
 ## How to play
 
+### Scenarios
+
+If you want to play with a custom scenario, you can use the -f arg to specify a file containing the scenario. Example:
+
+```bash
+ ./Battleship -f scenarios/format3.txt
+```
+
 ### Rules
 
 This game follows the classic rules of Battleship except that a missed shot will become a mine and ships can move.
